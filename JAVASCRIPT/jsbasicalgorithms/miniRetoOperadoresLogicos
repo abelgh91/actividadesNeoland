@@ -1,0 +1,13 @@
+//1. Crea una variable llamada **`planet`** y asígnale el valor "Tierra"
+let planet = "Tierra"
+
+// 2. Crea una variable llamada isInnerPlanet y asígnale el valor true (la Tierra es un planeta interno)
+let isInnerPlanet = false
+
+// 3. Crea una variable llamada **`hasAtmosphere`** y asígnale el valor **`true`** (la Tierra tiene atmósfera)"
+let hasAtmosphere = true
+
+// 4. Utiliza un operador lógico && (AND) para combinar las variables isInnerPlanet y hasAtmosphere en una expresión lógica que evalúe a true. Almacena el resultado en una variable llamada isHabitable.
+let isHabitable = isInnerPlanet && hasAtmosphere
+console.log(isHabitable)
+
