@@ -11,21 +11,15 @@ const nameFinder = [
     'Jessica',
     'Marc'
   ];
-console.log(nameFinder.includes(`Steve`))
+ function finderName(nombres){
+  for (let i = 0; i < nombres.length; i++){
+    if(nameFinder[i] === 'Clint'){
+      return 'Clint ' +`ha sido encontrado en la posicion `+ i;
+    }
+  }
+  return 'Clint '+ `no ha sido encontrado`
+ }
+ const nombreBuscado = 'Clint'
+ const resultado = finderName(nombreBuscado)
 
-// ---------------------------------INDEX OF
-
-const nameFinderr = [
-    'Peter',
-    'Steve',
-    'Tony',
-    'Natasha',
-    'Clint',
-    'Logan',
-    'Xabier',
-    'Bruce',
-    'Peggy',
-    'Jessica',
-    'Marc'
-  ];
-console.log(nameFinderr.indexOf(`Steve`))
+ console.log(resultado)
