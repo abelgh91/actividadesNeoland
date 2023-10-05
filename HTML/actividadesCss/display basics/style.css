@@ -1,0 +1,47 @@
+div{
+    height: 40px;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    color: #000000;
+    background-color: #e74c3c;
+    font-size: 20px;
+   
+}
+p{
+    height: 40px;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    color: #000000;
+    background-color: #9b59b6;
+    font-size: 20px;
+  
+
+}
+span{
+    height: 40px;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    color: #000000;
+    background-color: #3498db;
+    font-size: 20px;
+   
+    
+}
+a{
+    height: 40px;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    color: #000000;
+    background-color: #2ecc71;
+    font-size: 20px;
+    
+  
+}
