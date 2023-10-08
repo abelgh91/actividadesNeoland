@@ -20,7 +20,7 @@
   }
   
   .header {
-    background-color: #393f4d;
+    background-color: #1b51ce;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column: 1/3;
@@ -32,7 +32,7 @@
   .menu ul{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
- 
+    
   }
   
   .menu ul,
@@ -51,7 +51,7 @@
   }
   
    .sidebar .side-content {
-    background-color: white;
+    background-color: rgb(135, 74, 192);
     color: black;
     font-size: 16px;
     font-weight: normal;
@@ -65,7 +65,7 @@
   }
   
   .nav {
-    background-color: #FF7755;
+    background-color: rgb(135, 74, 192);
     display:grid;
     grid-column: 2/3;
     grid-template-columns: 1fr;
@@ -97,7 +97,7 @@
   }
   
   .article .card {
-    background-color: #FFFFFF;
+    background-color: #ffed4e;
     color: black;
     text-align: center;
     height: 200px;

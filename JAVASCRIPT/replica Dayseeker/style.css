@@ -1,0 +1,24 @@
+*{ margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html{
+    height: 100%;
+    margin: 0;
+    display: grid;
+}
+.container{
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    display:grid;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+.headerArriba {
+    background-color: #000000;
+    grid-column: 1/5;
+    display: flex;
+  }

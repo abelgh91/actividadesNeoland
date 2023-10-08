@@ -1,7 +1,7 @@
 //3.1
 const pointsList = [32, 54, 21, 64, 75, 43]
 
-//const pointsListCopy = [...pointsList]
+const pointsListCopy = [...pointsList]
 console.log(pointsListCopy)
 
 //3.2
