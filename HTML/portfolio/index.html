@@ -9,94 +9,81 @@
     <title>Document</title>
 </head>
 <body>
+<header id="header" class="header">
+    <img class="header__images--background" src="./assets/headerPortfolio.png" alt="background image"/>
+    <nav class="nav">
+      <ul class="nav__links">
+        <li>
+          <a class="nav__links--link" href="tel:+34676887603" target="_blank">
+            <ion-icon name="call-outline"></ion-icon>
+            <span> 676 887 603 </span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav--links__link"
+            href="mailto:abelgh91@gmail.com"
+            target="_blank"
+          >
+            <i class="far fa-envelope"></i>
+            <span class="hidden">abelgh91@gmail.com</span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav--links__link"
+            href="https://github.com/github"
+            target="_blank"
+          >
+            <i class="fab fa-github"></i>
+            <span>abelgh91 </span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav--links__link"
+            href="./assets/abelGarciaCV.png"
+            target="_blank"
+          >
+            <i class="fas fa-file-pdf"></i>
+            <span> Descargar CV</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+</header>
+
+<div>
+  <h1 class="header__text--title">ABEL GARCIA</h1>
+  <h2 class="header__text--subtitle">FULL-STACK DEVELOPER</h2>
+  <p class="header__text--info">Soy desarrollador FullStack y este es mi portfolio.</p>
+</div>
+<main>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <div class="container">
-        <header id="header" class="header">
-                <div class="header__images">
-                  <img
-                    class="header__images--background"
-                    src="./assets/headerPortfolio.png"
-                    alt="background image"
-                  />
-                </div>
-                <div class="header__text">
-                  <h1 class="header__text--title">ABEL GARCIA</h1>
-                  <h2 class="header__text--subtitle">FULL-STACK DEVELOPER</h2>
-                  <p class="header__text--info">
-                    Soy desarrollador FullStack y este es mi portfolio.
-                  </p>
-                </div>
-              </header>
-        </div>
-        <nav class="nav">
-            <ul class="nav__links">
-              <li>
-                <a class="nav__links--link" href="tel:+34676887603" target="_blank">
-                  <ion-icon name="call-outline"></ion-icon>
-                  <span> 676 887 603 </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="nav--links__link"
-                  href="mailto:abelgh91@gmail.com"
-                  target="_blank"
-                >
-                  <i class="far fa-envelope"></i>
-                  <span class="hidden">abelgh91@gmail.com</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="nav--links__link"
-                  href="https://github.com/github"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  <span>abelgh91 </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="nav--links__link"
-                  href="./assets/abelGarciaCV.png"
-                  target="_blank"
-                >
-                  <i class="fas fa-file-pdf"></i>
-                  <span> Descargar CV</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div id="skills" class="skills">
             <h2 class="skills__title">SKILLS</h2>
             <ul class="skill__list">
               <li class="skill__list--item uppercase">html5</li>
               <li class="skill__list--item uppercase">css3</li>
               <li class="skill__list--item uppercase">javascript</li>
-              <li class="skill__list--item purple uppercase">
-                Atención al detalle
-              </li>
+              <li class="skill__list--item purple uppercase">Atención al detalle</li>
               <li id="purple" class="skill__list--item purple uppercase">persistente</li>
             </ul>
-    </div>
-    <footer class="footer">
-      <div class="footer__links">
-        <ul>
-          <li>
-            <a class="footer__links--link" href="#header" rel="header__link"
-              >INICIO</a
-            >
-          </li>
-          <li>
-            <a class="footer__links--link" href="#skills" rel="skills__link"
-              >SKILLS</a
-            >
-          </li>
-        </ul>
-      </div>
-      <p class="footer__copyright">© Copyright 2022. Made by VtreV</p>
+
+            <ul>
+              <li><a class="footer__links--link" href="#header" rel="header__link">INICIO</a></li>
+              <li><a class="footer__links--link" href="#skills" rel="skills__link">SKILLS</a></li>
+            </ul>
+
+            <div class="proyecto1"></div>
+            <div class="proyecto2"></div>
+            <div class="proyecto3"></div>
+            <div class="proyecto4"></div>
+            <div class="proyecto5"></div>
+            <div class="proyecto6"></div>
+          </main>
+<footer class="footer">
+  <p class="footer__copyright">© Copyright 2022. Made by VtreV</p>
 </footer>
 </body>
 </html>
