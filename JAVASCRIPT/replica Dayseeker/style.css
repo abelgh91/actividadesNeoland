@@ -12,7 +12,7 @@ body{
     text-align: center;
     height: 100vh;
     width: 100vw;
-    padding: 16px;
+    color:white;
     box-sizing: border-box;
     display:flex;
     justify-content: center;
@@ -22,12 +22,13 @@ body{
 header{
     display: flex;
     flex-direction: column;
-   
+    width: 100vw;
     padding: 10px;
     background-color: #000000;
     color: white;
     justify-content: center;
     align-items: right;
+    font-family: 'Lato', sans-serif;
 }
 .headerArriba {
   width: 200px;
@@ -65,9 +66,10 @@ header{
   }
   .title{
     display: flex;
+
   }
   .containerFind{
-    width: 190px;
+    width: 150px;
   }
   
 ion-icon[name="logo-instagram"],
@@ -76,14 +78,67 @@ ion-icon[name="logo-youtube"] {
     margin-right: 10px;
 }
 .botonesDerecha{
-  width: 190px;
+  width: 150px;
 }
 .banner{
   width: 100vw;
+  overflow: hidden;
+  padding: 2rem;
 }
 .banner img{
   width: 100%;
+  overflow: hidden;
 }
 .main-content{
   width: 100vw;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+footer{
+  background-color:grey;
+  color: #000000;
+  width: 100vw;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-family: 'Lato', sans-serif;
+}
+input{
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+
+}
+h3{
+  margin: 8px;
+}
+.shop{
+  padding: 5rem;
+  font-family: 'Lato', sans-serif;
+}
+.store{
+  display: flex;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 5rem;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+iframe{
+  width: 100%;
+  position:relative;
+}
+.textoVideo{
+  font-size: large;
+  font-family: 'Roboto Mono', monospace;
+}
+.mdhydrated{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
