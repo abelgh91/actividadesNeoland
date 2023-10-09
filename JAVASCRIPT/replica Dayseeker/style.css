@@ -5,20 +5,85 @@
 body, html{
     height: 100%;
     margin: 0;
-    display: grid;
+    display: flex;
+    background-color: #000000;
 }
-.container{
+body{
     text-align: center;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     padding: 16px;
     box-sizing: border-box;
-    display:grid;
-    gap: 5px;
+    display:flex;
+    justify-content: center;
     flex-wrap: wrap;
+    align-items: center;
+}
+header{
+    display: flex;
+    flex-direction: column;
+   
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    justify-content: center;
+    align-items: right;
 }
 .headerArriba {
-    background-color: #000000;
-    grid-column: 1/5;
+  width: 200px;
+    display: flex;
+    align-items: center;
+  }
+.headerAbajo{
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  .listIzquierda,
+  .listDerecha {
+    width: 380px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    margin: 0;
+  }
+  .listIzquierda {
+    justify-content: right;
+    padding:0 2.3rem 0 0;
+    
+  }
+  .listDerecha {
+    justify-content: center;
+    
+  }
+  h1#title{
+    font-size: 24px;
+    margin: 0;
+  }
+  .title{
     display: flex;
   }
+  .containerFind{
+    width: 190px;
+  }
+  
+ion-icon[name="logo-instagram"],
+ion-icon[name="logo-facebook"],
+ion-icon[name="logo-youtube"] {
+    margin-right: 10px;
+}
+.botonesDerecha{
+  width: 190px;
+}
+.banner{
+  width: 100vw;
+}
+.banner img{
+  width: 100%;
+}
+.main-content{
+  width: 100vw;
+}
