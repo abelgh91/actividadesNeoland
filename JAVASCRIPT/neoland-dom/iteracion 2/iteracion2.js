@@ -18,7 +18,7 @@ div.appendChild(p);
 const div = document.createElement("div");
 body.appendChild(div);
 
-for (let i = 0; i <= 6; i++) {
+for (let i = 0; i <= 5; i++) {
     const parrafos = document.createElement("p");
     div.appendChild(parrafos);
 }

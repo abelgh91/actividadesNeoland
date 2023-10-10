@@ -12,7 +12,7 @@ console.log(pillado);
 
 //1.3
 
-let parrafos = document.querySelector(`p`);
+let parrafos = document.querySelectorAll(`p`);
 
 console.log(parrafos);
 
@@ -30,6 +30,6 @@ console.log(data);
 
 //1.6
 
-let dataTwo = document.querySelector(`[data-function="testMe[2]"]`)
+let dataTwo = document.querySelector(`[data-function="testMe"]`)
 
 console.log(data[2]);
