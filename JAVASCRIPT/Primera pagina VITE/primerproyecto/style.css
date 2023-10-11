@@ -45,5 +45,6 @@ main{
   width: 100vw;
   min-height: 75vh;
   padding: 3rem 0 3rem 0;
+  background-color: rgba(250, 241, 192, 0.767);
   
 }
