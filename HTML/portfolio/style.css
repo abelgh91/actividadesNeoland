@@ -2,28 +2,30 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 body{
-    width: 100vw;
-    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+    min-width: 600px;
 }
 header{
-    display: flex;
-    width: 100vw;
-    height: 40vh;
-    position: relative;
+    background-color: #3431cade;
+    color: #000000;
+    text-align: center;
+    padding: 20px 0;
+    height: 136px;
+    min-width: 400px;
 }
 nav{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    background-color: rgb(200, 237, 248); 
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 6px;
-    
+    background-color: rgb(219, 230, 231);
+    padding: 3px;
+    margin: 10px 0 0 0;
+    height:25px ;
+    min-width: 600px;
 }
 .nav__links{
     display: flex;
@@ -31,29 +33,56 @@ nav{
     align-items: center;
     list-style: none;
     gap: 2rem;
-    
 }
-header img{
-    width: 100%;
-    height: auto;
-    display: block;
-}
-div{
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    justify-content: center;
-    align-items: center;
-}
-main{
-    height: 50vh;
-}
+
 footer{
-    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
-    background-color: rgba(255, 43, 244, 0.685);
+    background-color: rgba(203, 171, 255, 0.925);
+}
+.skills{
+    background-color: #fda1a1;
+    text-align: center;
+}
+.skills__title{
+   padding: 5px;
+}
+
+.skills ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-around;
+    border: 2px solid rgba(134, 59, 255, 0.925);
+}
+.proyectos{
+    background-color: rgba(203, 171, 255, 0.315);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.proyecto1,
+.proyecto2,
+.proyecto3,
+.proyecto4,
+.proyecto5,
+.proyecto6 {
+    min-width: 400px;
+    min-height: 400px;
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+p{
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+  
 }
