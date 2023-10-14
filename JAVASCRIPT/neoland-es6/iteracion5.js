@@ -1,38 +1,38 @@
-//5.1
+// //5.1
 
-const ages = [22, 14, 24, 55, 65, 21, 12, 13, 90];
-const newArray = ages.filter((element)=> element > 18)
-console.log(newArray)
+// const ages = [22, 14, 24, 55, 65, 21, 12, 13, 90];
+// const newArray = ages.filter((element)=> element > 18)
+// console.log(newArray)
 
-//5.2
+// //5.2
 
-const ages = [22, 14, 24, 55, 65, 21, 12, 13, 90];
-const agesPar = ages.filter((element)=> element % 2 === 0)
-console.log(agesPar)
+// const ages = [22, 14, 24, 55, 65, 21, 12, 13, 90];
+// const agesPar = ages.filter((element)=> element % 2 === 0)
+// console.log(agesPar)
 
-//5.3
+// //5.3
 
-const streamers = [
-	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
-	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'}, 
-	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
-	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}]
+// const streamers = [
+// 	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
+// 	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'}, 
+// 	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
+// 	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}]
 
 
-    const newStreamers = streamers.filter((streamer)=> streamer.gameMorePlayed === 'League of Legends')
-    console.log(newStreamers)
+//     const newStreamers = streamers.filter((streamer)=> streamer.gameMorePlayed === 'League of Legends')
+//     console.log(newStreamers)
 
-//5.4
+// //5.4
 
-const streamers = [
-	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
-	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'},
-	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
-	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
-];
+// const streamers = [
+// 	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
+// 	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'},
+// 	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
+// 	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
+// ];
 
-const streamersConU = streamers.filter((streamer)=> streamer.name.includes(`u`))
-console.log(streamersConU)
+// const streamersConU = streamers.filter((streamer)=> streamer.name.includes(`u`))
+// console.log(streamersConU)
 
 //5.5
 
