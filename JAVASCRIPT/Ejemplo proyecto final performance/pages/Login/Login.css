@@ -9,27 +9,29 @@
 
   & #titleLogin {
     margin: 2rem;
-    font-size: 4em;
+    font-size: 3em;
+    font-family: 'Raleway', sans-serif;
   }
 
   & input {
     width: 300px;
     height: 40px;
-    border-radius: 5px;
+    border-radius: 25px;
     padding: 10px;
   }
 
   & button {
     width: 300px;
-    height: 40px;
+    height: 43px;
     margin: 20px;
-    background-color: #0def03;
+    background-image: url(https://res.cloudinary.com/dqlvldxwc/image/upload/v1697394995/start_1_yrkodo.png);
+    background-color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     font-size: 16px;
     -webkit-box-shadow: 0px 4px 10px -3px rgba(0, 0, 0, 0.61);
     -moz-box-shadow: 0px 4px 10px -3px rgba(0, 0, 0, 0.61);
-    box-shadow: 0px 4px 10px -3px rgba(0, 0, 0, 0.61);
+    box-shadow: 0px 4px 10px -3px rgba(170, 170, 170, 0.61);
 
     transition: ease-in-out 0.1s;
     &:hover {
