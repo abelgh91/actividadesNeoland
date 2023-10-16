@@ -26,8 +26,7 @@ const template = () => `
 // no entiendo esta funcion
 const dataService = async () => {
   const getDataPokemon = getData("Pokemon");
-
-  const { pokemonData, type } = getDataPokemon;
+  const { pokemonData, type } = getDataPokemon; // destructuring
 
   CardsPokemons(pokemonData);
   document.getElementById("spinner").innerHTML = "";

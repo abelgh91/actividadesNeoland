@@ -47,6 +47,14 @@
     justify-content:center;
     margin-top: 10px;
   }
+  .score{
+    justify-content: right;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+
   #previous{
     background-color: rgb(0, 0, 0);
     color: white;
@@ -60,7 +68,7 @@
     text-align: center;
   }
   #Quiz{
-    display: block;
+    display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;

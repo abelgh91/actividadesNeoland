@@ -9,7 +9,7 @@ const template = () => `
       <li>
         <figure id="navigatePokemon">
           <img
-            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761508/pngwing.com_r0hr9b.png"
+            src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697480701/2_h15s7d.png"
             alt="go to page pokemon"
           />
           <h2>POKEMON</h2>
@@ -18,7 +18,7 @@ const template = () => `
       <li>
         <figure id="navigateWackaTopo">
           <img
-            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761641/pngwing.com_1_iq8zfk.png"
+            src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697480703/1_b1ehte.png"
             alt=" go to wacka topo game"
           />
           <h2>WACKA TOPO</h2>
@@ -27,7 +27,7 @@ const template = () => `
       <li>
         <figure id="navigateQuiz">
           <img
-            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761735/6168776_kfna36.png"
+            src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697480702/3_vpsmgg.png"
             alt="go to Quiz game"
           />
           <h2>QUIZ FÚTBOL</h2>

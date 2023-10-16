@@ -7,23 +7,23 @@ import "./Header.css";
 
 const template = () => `
   <img
-    src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697392720/letsplay_ysnbwr.png"
+    src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697482549/header_wwdl5s.png"
     alt="title hub game website (app)"
     class="logo"
   />
   <nav>
     <img
-      src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697454961/colorpicker_a5du5d.png"
+      src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697478652/1_bsdato.png"
       alt=" change to style mode page"
       id="changeColor"
     />
     <img
-      src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682685633/home_nekvs0.png"
+      src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697478690/2_yedbar.png"
       alt=" navigate to home app"
       id="buttonDashboard"
     />
     <img
-      src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682679055/logout_arz0gw.png"
+      src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697478719/3_zf17by.png"
       alt="logout"
       id="buttonLogout"
     />
