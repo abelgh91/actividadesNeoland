@@ -1,8 +1,9 @@
 .grid {
-	width: 606px;
-	height: 606px;
+	width: 600px;
+	height: 600px;
 	display: flex;
 	flex-wrap: wrap;
+	
 }
 
 .square {
@@ -11,6 +12,10 @@
 	border: solid black 1px;
 }
 
-.mole{
-
+#titulo{
+	text-align: center;
 }
+.mole{
+	background-image: url("https://res.cloudinary.com/dqlvldxwc/image/upload/v1697453608/topo_jtcy3h.png");
+}
+

@@ -1,6 +1,7 @@
-import { getData } from "../../global/state/globalState";
+import { getData, getIntervalTopo } from "../../global/state/globalState";
 import { getInfo, initControler } from "../../utils";
 import "./Dashboard.css";
+
 
 const template = () => `
   <div id="containerDashboard">
@@ -59,4 +60,9 @@ export const printTemplateDashboard = () => {
   addEventListeners();
   console.log(getData());
   getInfo();
+  const idInterval = getIntervalTopo();
+  console.log(`id`, idInterval)
+  clearInterval(idInterval.topo)
+  clearInterval(idInterval.topoTime)
 };
+

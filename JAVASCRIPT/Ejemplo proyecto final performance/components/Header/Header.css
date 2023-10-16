@@ -1,13 +1,14 @@
 header {
-  height: 30vh;
+  height: 25vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   @media (max-width: 600px) {
     flex-direction: column;
   }
+
 /* position:fixed para que se puede incrustar el nav despues */
   & nav img {
     width: 20%;

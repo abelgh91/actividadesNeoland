@@ -1,5 +1,5 @@
 footer {
-  height: 10vh;
+  height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@ footer {
   -webkit-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
   -moz-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
   box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61); */
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
   z-index: 100;

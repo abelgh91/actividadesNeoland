@@ -104,8 +104,10 @@ export const preguntasRespuestas = [{
     falsa3: "Julen Lopetegui"
   },]
 
+
   const questions = document.querySelector("pregunta")
 
   for(let i = 0;i < preguntasRespuestas.length;i++){
     
   }
+console.log(questions)

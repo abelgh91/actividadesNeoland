@@ -22,6 +22,23 @@ const dataGlobal = {
   ricky: [],
 };
 
+const interval = {
+  topo: "",
+  topoTime: ""
+}
+
+export const setIntervalTopo = (intervalId) => {
+  interval.topo = intervalId
+}
+
+export const setIntervalTopoTimer = (intervalId) => {
+  interval.topoTime = intervalId
+}
+
+export const getIntervalTopo = () => {
+  return interval
+}
+
 //! -------------------- funcion que SETTEA----------------
 
 export const setUser = (username) => {
