@@ -1,11 +1,11 @@
 import "./style.css";
-import { getInfo, hello, initControler, initTemplate } from "./utils";
+import { getInfo, hello, renderControl, mainRender } from "./utils";
 
 hello();
 
 //! ---------------------------> renderizamos las etiquetas de la estructura inicial
-initTemplate();
+mainRender();
 
 //! ---------------------------> lo ponemos sin parametro para que salte al caso de switch de undefined para evaluar el user
-initControler();
+renderControl();
 getInfo();

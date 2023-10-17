@@ -83,11 +83,11 @@ function countDown(countDownTimerId) {
     clearInterval(countDownTimerId) 
     clearInterval(timerId);
     alert("GAME OVER! Your score is: " + result)
-    printTemplateTopo()
+    pintarTopo()
   }
 }
  
-export const printTemplateTopo = () => {
+export const pintarTopo = () => {
   currentTime = 60;
   result = 0;
   document.querySelector("main").innerHTML = template();

@@ -1,10 +1,10 @@
 import { setUser, setUserData } from "../../global/state/globalState";
-import { initControler } from "../../utils/route";
+import { renderControl } from "../../utils/route";
 import "./Login.css";
 const template = () => `
   <div id="containerLogin">
     <h1 id="titleLogin">LOGIN</h1>
-    <input type="text" name="username" id="username" />
+    <input type="text" name="username" placeholder="Maria, Itziar, Hugo..." id="username" required/>
     <button id="buttonLogin"></button>
   </div>
 `;
@@ -49,7 +49,7 @@ const addListeners = () => {
       setUserData(customUser);
     }
 
-    initControler();
+    renderControl();
   });
 };
 

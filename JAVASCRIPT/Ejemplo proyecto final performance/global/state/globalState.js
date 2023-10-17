@@ -19,7 +19,6 @@ let userData = localStorage.getItem(currentUser.name)
 // ------------------> DATA GLOBAL DE LA APLICACION--------
 const dataGlobal = {
   pokemon: [],
-  ricky: [],
 };
 
 const interval = {

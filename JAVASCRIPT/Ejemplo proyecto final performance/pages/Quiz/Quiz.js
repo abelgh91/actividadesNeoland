@@ -176,7 +176,7 @@ const addEventListeners = () => {
 
 };
 
-export const printTemplateQuiz = () => {
+export const pintarQuiz = () => {
   index = 0;
   preguntasRespondidas = [];
   document.querySelector("main").innerHTML = template();

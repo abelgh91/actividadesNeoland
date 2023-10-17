@@ -1,6 +1,6 @@
-import { PrintTemplateHeader, PrintTemplateFooter } from "../components";
+import { pintarHeader, pintarFooter } from "../components";
 
-export const initTemplate = () => {
+export const mainRender = () => {
   const app = document.getElementById("app");
 
   //? -------> vamos a crear los elementos
@@ -12,8 +12,9 @@ export const initTemplate = () => {
   console.log(app);
 
   app.append(header, main, footer);
-  PrintTemplateHeader();
-  PrintTemplateFooter();
+  // no se pinta el main porque es dinamico
+  pintarHeader();
+  pintarFooter();
 };
 
 export const hello = () => {

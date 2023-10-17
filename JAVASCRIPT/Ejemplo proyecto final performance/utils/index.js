@@ -1,4 +1,4 @@
-export * from "./initTemplate";
+export * from "./mainrender";
 export * from "./route";
 export * from "./changeColor";
 export * from "./axios";

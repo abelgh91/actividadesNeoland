@@ -67,7 +67,7 @@ export const filterPokemon = (filterDataInputButton, donde) => {
             .toLowerCase()
             .includes(filterDataInputButton.toLowerCase())
         );
-// no entiendo los numeros 25 y 5
+
         if (filterDataInputButton == "") {
           Paginacion(filterData, 25);
         } else {

@@ -1,6 +1,6 @@
 import { getUser } from "../../global/state/globalState";
 import { changeColorRGB } from "../../utils";
-import { initControler } from "../../utils/route";
+import { renderControl } from "../../utils/route";
 import "./Header.css";
 
 //! ------------------1) TEMPLATE -------------------------------------
@@ -43,7 +43,7 @@ const addListeners = () => {
   // evento click del boton que nos lleva a los juegos
   const buttonDashboard = document.getElementById("buttonDashboard");
   buttonDashboard.addEventListener("click", (e) => {
-    initControler("Dashboard");
+    renderControl("Dashboard");
   });
 
   // evento del logout
@@ -57,12 +57,12 @@ const addListeners = () => {
     localStorage.removeItem(userState);
     sessionStorage.removeItem("currentUser");
     localStorage.setItem(userState, stringUpdateUser);
-    initControler("Login");
+    renderControl("Login");
   });
 };
 
 //! ------------------------------ 3) La funcion que se exporta y que pinta
-export const PrintTemplateHeader = () => {
+export const pintarHeader = () => {
   document.querySelector("header").innerHTML = template();
   addListeners();
 };

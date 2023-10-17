@@ -1,5 +1,5 @@
 import { getData, getIntervalTopo } from "../../global/state/globalState";
-import { getInfo, initControler } from "../../utils";
+import { getInfo, renderControl } from "../../utils";
 import "./Dashboard.css";
 
 
@@ -40,21 +40,21 @@ const template = () => `
 const addEventListeners = () => {
   const navigatePokemon = document.getElementById("navigatePokemon");
   navigatePokemon.addEventListener("click", () => {
-    initControler("Pokemon");
+    renderControl("Pokemon");
   });
 
   const navigateQuiz = document.getElementById("navigateQuiz");
   navigateQuiz.addEventListener("click", () => {
-    initControler("Quiz");
+    renderControl("Quiz");
   });
 
   const navigateWackaTopo = document.getElementById("navigateWackaTopo");
   navigateWackaTopo.addEventListener("click", () => {
-    initControler("Topo");
+    renderControl("Topo");
   });
 };
 
-export const printTemplateDashboard = () => {
+export const pintarDashboard = () => {
   document.querySelector("main").innerHTML = template();
   document.querySelector("nav").style.display = "flex";
   addEventListeners();

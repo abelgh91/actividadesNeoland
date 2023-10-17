@@ -45,7 +45,7 @@ const addListeners = () => {
   });
 };
 
-export const PrintPokemonPage = () => {
+export const pintarPokemon = () => {
   document.querySelector("main").innerHTML = template();
   PrintTemplateSpinner();
   PrintSpinner();

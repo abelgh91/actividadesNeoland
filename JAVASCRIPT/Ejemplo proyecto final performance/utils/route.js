@@ -1,30 +1,30 @@
 import { getUser } from "../global/state/globalState";
-import { Login, PrintPokemonPage, printTemplateDashboard, printTemplateQuiz, printTemplateTopo} from "../pages";
+import { Login, pintarPokemon, pintarDashboard, pintarQuiz, pintarTopo} from "../pages";
 
 //! ----------------------------------------------------------------------------------------------------------------------
 //? ------------------------------------- CONTROLADOR DE LO QUE SE RENDERIZA EN CADA MOMENTO------------------------------
 //! ----------------------------------------------------------------------------------------------------------------------
 
-export const initControler = (pagesRender) => {
+export const renderControl = (pagesRender) => {
   console.log("soy el user", getUser().name);
   switch (pagesRender) {
     case undefined:
-      localStorage.getItem(getUser().name) ? printTemplateDashboard() : Login();
+      localStorage.getItem(getUser().name) ? pintarDashboard() : Login();
       break;
     case "Pokemon":
-      PrintPokemonPage();
+      pintarPokemon();
       break;
     case "Dashboard":
-      printTemplateDashboard();
+      pintarDashboard();
       break;
     case "Topo":
-      printTemplateTopo();
+      pintarTopo();
       break;
     case "Login":
       Login();
       break;
     case "Quiz":
-      printTemplateQuiz();
+      pintarQuiz();
       break;
       default:
         console.log("La opcion seleccionada no existe: %s", pagesRender);

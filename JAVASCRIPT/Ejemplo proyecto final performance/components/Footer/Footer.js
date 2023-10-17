@@ -3,6 +3,6 @@ const template = () => `
 <h3><span>SOUTH CLUB GAMES by</span> Abel Garcia</h3>
 `;
 
-export const PrintTemplateFooter = () => {
+export const pintarFooter = () => {
   document.querySelector("footer").innerHTML = template();
 };
