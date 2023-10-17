@@ -8,7 +8,7 @@ const mole = document.querySelector(".mole")
 
 let result = 0
 let hitPosition;
-let currentTime = 500;
+let currentTime = 60;
 let timerId = null;  
 let countDownTimerId;
 const template = () => `
@@ -47,9 +47,9 @@ function randomSquare () {
   console.log(randomNumber)
 
   let randomSquare = squares[randomNumber]
-  randomSquare.classList.add("mole");  // da error
+  randomSquare.classList.add("mole");  
 
-  hitPosition = randomSquare.id; // da error
+  hitPosition = randomSquare.id; 
 }
 
 
@@ -77,18 +77,18 @@ function moveMole () {
 function countDown(countDownTimerId) {
   currentTime--;
   const timeLeft = document.getElementById("time-left")
-  timeLeft.textContent = currentTime;  // da error
+  timeLeft.textContent = currentTime;  
 
   if(currentTime == 0) {
-    clearInterval(countDownTimerId) // no la entiendo bien
+    clearInterval(countDownTimerId) 
     clearInterval(timerId);
     alert("GAME OVER! Your score is: " + result)
     printTemplateTopo()
   }
 }
- // el contador no hace la cuenta atras
+ 
 export const printTemplateTopo = () => {
-  currentTime = 500;
+  currentTime = 60;
   result = 0;
   document.querySelector("main").innerHTML = template();
   document.querySelector("nav").style.display = "flex";
