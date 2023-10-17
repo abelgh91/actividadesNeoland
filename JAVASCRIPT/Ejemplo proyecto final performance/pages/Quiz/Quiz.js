@@ -283,10 +283,7 @@ const checkAnswer = (answer) => {
     document.getElementById("solution").innerText = "INCORRECTO"
     document.getElementById("solution").style.color="red"
   }
-  // document.getElementById("respuestaCorrecta").style.backgroundColor = "green"
   };
   congratulationsTemplate(); 
 
 console.log(preguntasRespondidas)
-
-// let buttons = document.querySelectorAll(".answer-btn");
