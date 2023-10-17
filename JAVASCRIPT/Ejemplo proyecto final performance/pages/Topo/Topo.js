@@ -8,18 +8,19 @@ const mole = document.querySelector(".mole")
 
 let result = 0
 let hitPosition;
-let currentTime = 60;
+let currentTime = 500;
 let timerId = null;  
 let countDownTimerId;
 const template = () => `
   <div id="Topo">
   <h1 id="titulo">WHAC A MOLE</h1>
-  <h2 id="yourscore">Your score:</h2>
-  <h2 id="score">0</h2>
+    <div class="components">
+      <h2 id="yourscore">Your score:</h2>
+      <h2 id="score">0</h2>
 
-  <h2 id="time">Time Left:</h2>
-  <h2 id="time-left">60</h2>
-
+      <h2 id="time">Time Left:</h2>
+      <h2 id="time-left">60</h2>
+   </div>
   <div class="grid">
     <div class="square" id="1"></div>
     <div class="square" id="2"></div>
@@ -87,7 +88,7 @@ function countDown(countDownTimerId) {
 }
  // el contador no hace la cuenta atras
 export const printTemplateTopo = () => {
-  currentTime = 60;
+  currentTime = 500;
   result = 0;
   document.querySelector("main").innerHTML = template();
   document.querySelector("nav").style.display = "flex";

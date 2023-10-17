@@ -126,16 +126,18 @@ const preguntasRespuestas = [{
   },]
 
   const template = () => `
-  <div class="score">Score: <span id="score">0</span></div>
-  <div id="Quiz">
-    <h1 id="question">pregunta</h1>
-    <button id="r1" class="answer answer-btn incorrecta" data-answer="respuesta1">respuesta1</button>
-    <button id="r2" class="answer answer-btn incorrecta" data-answer="respuesta2">respuesta2</button>
-    <button id="r3" class="answer answer-btn incorrecta" data-answer="respuesta3">respuesta3</button>
-    <button id="r4" class="answer answer-btn incorrecta" data-answer="respuesta4">respuesta4</button>
-    <h2 id="solution"></h2>
-    <button id="previous" class="navigationButton">ANTERIOR</button>
-    <button id="next" class="navigationButton">SIGUIENTE</button>
+  <div class="containerQuiz">
+    <div class="score">Score: <span id="score">0</span></div>
+    <div id="Quiz">
+      <h1 id="question">pregunta</h1>
+      <button id="r1" class="answer answer-btn incorrecta" data-answer="respuesta1">respuesta1</button>
+      <button id="r2" class="answer answer-btn incorrecta" data-answer="respuesta2">respuesta2</button>
+      <button id="r3" class="answer answer-btn incorrecta" data-answer="respuesta3">respuesta3</button>
+      <button id="r4" class="answer answer-btn incorrecta" data-answer="respuesta4">respuesta4</button>
+      <div class="navBotones"><h2 id="solution"></h2>
+      <button id="previous" class="navigationButton">ANTERIOR</button>
+      <button id="next" class="navigationButton">SIGUIENTE</button></div>
+    </div>
   </div>
 `;
 
@@ -223,7 +225,7 @@ const loadQuestion = () => {
 
     const restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", () => {
-      document.querySelector("#Quiz").style.display="block";
+      document.querySelector("#Quiz").style.display="flex";
       score = 0;
       document.getElementById("score").innerText = score;
       currentIndex = 0;

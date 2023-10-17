@@ -1,14 +1,24 @@
-.grid {
-	width: 600px;
-	height: 600px;
+
+#Topo{
 	display: flex;
+	flex-direction: column;
+	min-width: 300px;
+	max-width: 600px;
+}
+
+.grid {
+	display: flex;
+	width: 300px;
+	height: 300px; 
 	flex-wrap: wrap;
-	
+	min-width: 300px;
+    max-width: 300px;
 }
 
 .square {
-	height: 200px;
-	width: 200px;
+	display: flex;
+	height: 100px;
+	width: 100px;
 	border: solid black 1px;
 }
 
@@ -17,5 +27,13 @@
 }
 .mole{
 	background-image: url("https://res.cloudinary.com/dqlvldxwc/image/upload/v1697453608/topo_jtcy3h.png");
+}
+
+.components{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 2px;
+	margin-bottom: 8px;
 }
 
