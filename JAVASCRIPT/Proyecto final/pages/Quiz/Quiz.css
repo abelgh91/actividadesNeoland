@@ -60,6 +60,7 @@
     color: white;
     align-self: flex-start;
     position: fixed;
+    
   }
   #next{
     display: flex;
@@ -71,6 +72,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-bottom: 15px;
   }
   #Quiz{
     display: flex;
@@ -80,7 +82,7 @@
     font-size: small;
     min-width: 200px;
     max-width: 600px;
-    height: 400px;
+    height: 410px;
     gap:4px;
   }
     ;
