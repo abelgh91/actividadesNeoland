@@ -1,0 +1,41 @@
+header {
+  height: 25vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  -webkit-box-shadow: 18px 25px 37px -7px rgba(255,183,0,0.3);
+  -moz-box-shadow: 18px 25px 37px -7px rgba(255,183,0,0.3);
+  box-shadow: 18px 25px 37px -7px rgba(255,183,0,0.3);
+  /* position: fixed; */
+  width: 100%;
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+
+/* position:fixed para que se puede incrustar el nav despues */
+  & nav img {
+    width: 20%;
+    margin: 0.8em;
+    transition: ease-in-out 0.3s;
+    @media (max-width: 600px) {
+      width: 40%;
+    }
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  & .logo {
+    height: 100%;
+    object-fit: cover;
+    @media (max-width: 600px) {
+      width: 30vw;
+      height: 10vh;
+    }
+  }
+  & nav {
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
