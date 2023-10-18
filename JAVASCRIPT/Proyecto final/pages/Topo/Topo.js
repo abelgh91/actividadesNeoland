@@ -35,9 +35,9 @@ const template = () => `
   </div>
 `;
 
-function randomSquare () {
+const randomSquare = () => {
   const squares = document.querySelectorAll('.square')
-  // console.log(squares)
+ 
   squares.forEach(square => {
     square.classList.remove("mole")
   })
@@ -67,14 +67,14 @@ const addEventListener = () => {
   })
 }
 
-function moveMole () {
+const moveMole = () => {
   timerId = setInterval(randomSquare, 500);
   setIntervalTopo(timerId);
 }
 
 
 
-function countDown(countDownTimerId) {
+const countDown = (countDownTimerId) => {
   currentTime--;
   const timeLeft = document.getElementById("time-left")
   timeLeft.textContent = currentTime;  
