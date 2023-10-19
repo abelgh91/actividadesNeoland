@@ -3,8 +3,6 @@ import { changeColorRGB } from "../../utils";
 import { RenderControl } from "../../utils/route";
 import "./Header.css";
 
-//! ------------------1) TEMPLATE -------------------------------------
-
 const template = () => `
   <img
     src="https://res.cloudinary.com/dqlvldxwc/image/upload/v1697482549/header_wwdl5s.png"
@@ -30,23 +28,19 @@ const template = () => `
   </nav>
 `;
 
-//! ----------------------- 2 ) Añadir los eventos con sus escuchadores
-
 const addListeners = () => {
-  // evento click del boton de cambio de color
+  
   const changeColor = document.getElementById("changeColor");
   changeColor.addEventListener("click", (e) => {
     const color = changeColorRGB();
     document.body.style.background = color;
   });
-
-  // evento click del boton que nos lleva a los juegos
+  
   const buttonDashboard = document.getElementById("buttonDashboard");
   buttonDashboard.addEventListener("click", (e) => {
     RenderControl("Dashboard");
   });
-
-  // evento del logout
+  
   const buttonLogout = document.getElementById("buttonLogout");
   buttonLogout.addEventListener("click", (e) => {
     const userState = getUser().name;
@@ -61,7 +55,6 @@ const addListeners = () => {
   });
 };
 
-//! ------------------------------ 3) La funcion que se exporta y que pinta
 export const PintarHeader = () => {
   document.querySelector("header").innerHTML = template();
   addListeners();

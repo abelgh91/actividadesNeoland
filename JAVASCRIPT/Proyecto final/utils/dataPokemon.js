@@ -33,8 +33,7 @@ const dataMap = (data) => {
 };
 
 export const filterPokemon = (filterDataInputButton, donde) => {
-  /// donde : es si quiero hacerlo por type en los botones o por nombre en el input
-  /// filterDataInputButton:  la palabra que nos sirve para filtrar
+   
 
   switch (donde) {
     case "type":

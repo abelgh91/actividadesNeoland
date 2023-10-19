@@ -1,7 +1,7 @@
 footer {
   height: 7vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   -webkit-box-shadow: 0px 5px 37px -9px rgba(47,209,250,1);
 -moz-box-shadow: 0px 5px 37px -9px rgba(47,209,250,1);
@@ -14,4 +14,21 @@ box-shadow: 0px 5px 37px -9px rgba(47,209,250,1);
   & span {
     color: rgb(0, 0, 0);
   }
+}
+
+#imgfooter{
+  width: 50px;
+  height: 45px;
+  /* border-style: none; */
+  background-color: white;
+}
+
+.footerbtn{
+  border-style: none;
+}
+
+#imgfooter:hover{
+  transform: scale(1.1);
+  background-color: white;
+  transition: ease-in-out 0.2s;
 }

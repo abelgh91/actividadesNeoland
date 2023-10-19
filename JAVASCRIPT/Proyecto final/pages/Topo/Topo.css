@@ -2,8 +2,9 @@
 #Topo{
 	display: flex;
 	flex-direction: column;
-	min-width: 300px;
-	max-width: 600px;
+	height: 90%;
+	width: 90%;
+	align-items: center;
 }
 
 .grid {
@@ -12,13 +13,16 @@
 	height: 300px; 
 	flex-wrap: wrap;
 	min-width: 300px;
-    max-width: 300px;
+    max-width: 600px;
 }
 
 .square {
 	display: flex;
-	height: 100px;
-	width: 100px;
+	min-height: 100px;
+	min-width: 100px;
+	max-width: 180px;
+	max-height: 180px;
+
 	border: solid black 1px;
 }
 
@@ -26,7 +30,8 @@
 	text-align: center;
 }
 .mole{
-	background-image: url("https://res.cloudinary.com/dqlvldxwc/image/upload/v1697625721/100_qbiwp6.png");
+	background-image: url("https://res.cloudinary.com/dqlvldxwc/image/upload/c_pad,h_120,w_120/v1697554857/Captura_eskuhy.png");
+	background-size: cover;
 }
 
 .components{
@@ -37,3 +42,13 @@
 	margin-bottom: 8px;
 }
 
+@media (min-width: 1024px) {
+.grid {
+	display: grid;
+	width: 540px;
+	height: 540px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+}

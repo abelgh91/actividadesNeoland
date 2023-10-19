@@ -20,7 +20,6 @@ const addListeners = () => {
       name: valueInput,
       fav: [],
     };
-    // como trabajo con el local lo convierto a string
     
     if (localStorage.getItem(`${valueInput}USER`)) {
       const localUser = localStorage.getItem(`${valueInput}USER`);
