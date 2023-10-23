@@ -5,7 +5,6 @@ import inquirer from "inquirer"
 const scrapping = async (keyWord) => {
     const BASE_URL =  "https://www.tantanfan.com/";
 
-
     const browser = await puppeteer.launch({
         headless: false,
      defaultViewport: null,
@@ -33,7 +32,6 @@ const scrapping = async (keyWord) => {
    await page.click("#onetrust-accept-btn-handler");
    await page.waitForTimeout(6000);
    await page.click(".button-search");
-   await page.waitForTimeout(6000);
    await page.type(".button-search", keyWord);
    await page.keyboard.press("Enter");
    await page.waitForTimeout(6000);
