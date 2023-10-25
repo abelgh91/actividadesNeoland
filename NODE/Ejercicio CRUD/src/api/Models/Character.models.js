@@ -1,6 +1,6 @@
 //traemos mongoose y la parte de los esquemas de datos
 const mongoose = require("mongoose")
-const esquemas = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 /*creamos los esquemas de datos y le ponemos a cada valor del objeto las caracteristicas que queramos
 lo que sea required, longitu max o min, que sea unico o no, etc*/
