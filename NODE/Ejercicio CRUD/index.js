@@ -27,10 +27,10 @@ app.use(cors());
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: false }));
 
-//creamos rutas
+//creamos rutas. Tenemos que importar la funcion de las rutas cuando tengamos creado el archivo de las routes.
 
-const CharactersRoutes = require("./src/api/Routes/Characters.routes");
-app.use("/api/v1/characters/", CharactersRoutes);
+// const CharactersRoutes = require("./src/api/Routes/Character.routes");
+// app.use("/api/v1/characters/", CharacterRoutes);
 
 //creamos una funcion para que gestione cuando no encuentre la ruta(404) y otra para cuando crashee(500)
 
