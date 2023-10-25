@@ -97,7 +97,7 @@ const getByName = async (req, res, next) => {
         const {name} = req.params;
         const characterByName = await Character.find({name});
         if (characterByName.length > 0){
-            return res.status(200).json(getByName);
+            return res.status(200).json(characterByName);
         }else {
             return res.status(404).json("No se ha podido encontrar el character 👎")
         }
