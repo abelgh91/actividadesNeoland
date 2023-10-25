@@ -1,6 +1,8 @@
 //importamos las funciones que nos vayan haciendo falta
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
+const enumOk = require("../../utils/enumOk");
 const Character = require("../Models/Character.models");
+
 
 
 //Hacemos el CRUD (create, read, update, delete)
@@ -107,5 +109,99 @@ const getByName = async (req, res, next) => {
     }
 };
 
+//UPDATE
 
-module.exports = {create, getById, getAll};
+const update = async (req, res, next) => {
+    //actualizamos 
+    await Character.syncIndexes();
+    let takeImage = req.file?.path;
+    try {
+        const {id} = req.params;
+        const characterById = await Character.findById(id);
+        if (characterById){
+            const imgAntigua = characterById.image;
+
+            // creamos el cuerpo del cliente, le decimos que si trae algo nuevo se quede con lo nuevo, sino con lo antiguo
+            const bodyCliente = {
+                _id: characterById._id,
+                image: req.file?.path ? takeImage : imgAntigua,
+                name: req.body?.path ? req.body?.path : characterById.name,
+            };
+            //hacemos lo mismo con el genero
+            if(req.body?.gender){
+                const resultEnum = enumOk(req.body?.gender)
+                bodyCliente.gender = resultEnum.check ? req.body?.gender : characterById.gender;
+            }
+
+            try {
+                await Character.findByIdAndUpdate(id, bodyCliente);
+                if(req.file?.path){
+                    deleteImgCloudinary(imgAntigua);
+                }
+
+            //testeamos en tiempo real que esto esté funcionando
+            const elementoActualizadoById = await Character.findById(id);
+            const elementoActualizado = Object.keys(req.body); // sacamos las claves para ver qué nos ha dicho que actualicemos
+            let test = {};
+            elementoActualizado.forEach((item)=>{
+                if(req.body[item] === elementoActualizadoById[item]){
+                    test[item] = true
+                }else {
+                    test[item] = false
+                }
+            });
+            if(takeImage){
+                elementoActualizadoById.image === takeImage ? (test = {...test, file: true}) : (test = {...test, file: false}); 
+            };
+
+            // si hay algun false lanzamos un 404, si es todo true quiere decir que se ha actualizado todo y lanzamos un 200
+            //hacemos un contador y recorremos con for in porque es un objeto
+
+            let acc = 0;
+            for(clave in test){
+                test[clave] == false && acc++;
+            }
+            if(acc > 0){
+                return res.status(404).json({
+                    dataTest: test,
+                    update: false,
+                });
+            }else{
+                return res.status(200).json({
+                    dataTest: test,
+                    update: true,
+                });
+            }
+
+            } catch (error) {}
+        }else{
+            return res.status(404).json("Este character no existe 👎")
+        }
+    } catch (error) {
+        return res.status(404).json(error);
+    }
+};
+
+//DELETE
+
+const eliminarCharacter = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const movie = await Character.findByIdAndDelete(id);
+        //hacemos el testing
+        if(movie){
+            const findByIdMovie = await Character.findById(id); // creamos esta funcion para ver si encuentra lo que hemos borrado
+            return res.status(findByIdMovie ? 404 : 200).json( // si existe es que no se ha borrado por tanto un 404
+                {
+                    deleteTest: findByIdMovie ? false : true,
+                });
+        }else{
+            return res.status(404).json("Este character no existe 👎");
+        }
+    } catch (error) {
+        return res.status(404).json(error);
+    }
+};
+
+
+module.exports = {create, getById, getAll, getByName, update, eliminarCharacter};
