@@ -23,7 +23,7 @@ const crearMovie = async (req, res, next) => {
 const toggleCharacter = async (req, res, next) => {
 try {
     const {id} = req.params; //id de la movie que queremos que se actualice
-    const {Character} = req.body;
+    const {characters} = req.body;
 
     const movieById = await Movie.findById(id); //buscamos la movie a ver si existe
     if (movieById){
