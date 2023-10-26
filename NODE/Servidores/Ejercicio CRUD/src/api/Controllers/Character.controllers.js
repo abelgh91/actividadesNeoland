@@ -15,8 +15,7 @@ const Character = require("../Models/Character.models");
 //ahora vamos a coger la url de la imagen, porque como se sube antes de meternos en el controlador,
 //si hay error en el controlador, la borramos de cloudinary antes.
 const create = async (req, res, next) => {
-    //req.file es porque es una imagen, la ? es un optional chaining que se pone porque no es obligatorio meter
-    //imagen entonces puede que no la tengamos, y path es la ruta de la imagen
+
     let takeImage = req.file?.path;
     //actualizar indexes por si hay alguna actualizacion
     try {
