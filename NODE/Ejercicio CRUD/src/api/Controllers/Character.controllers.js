@@ -187,9 +187,9 @@ const update = async (req, res, next) => {
 const eliminarCharacter = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const movie = await Character.findByIdAndDelete(id);
+        const character = await Character.findByIdAndDelete(id);
         //hacemos el testing
-        if(movie){
+        if(character){
             const findByIdMovie = await Character.findById(id); // creamos esta funcion para ver si encuentra lo que hemos borrado
             return res.status(findByIdMovie ? 404 : 200).json( // si existe es que no se ha borrado por tanto un 404
                 {

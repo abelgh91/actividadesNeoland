@@ -32,6 +32,9 @@ app.use(express.urlencoded({ limit: "5mb", extended: false }));
 const CharactersRoutes = require("./src/api/Routes/Character.routes");
 app.use("/api/v1/characters/", CharactersRoutes);
 
+const movieRoutes = require("./src/api/Routes/Movie.routes")
+app.use("/api/v1/movies", movieRoutes)
+
 //creamos una funcion para que gestione cuando no encuentre la ruta(404) y otra para cuando crashee(500)
 
 app.use("*", (req, res, next) => {

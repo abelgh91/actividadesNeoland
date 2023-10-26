@@ -8,7 +8,7 @@ dotenv.config();
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "CRUDE",
+    folder: "CRUD",
     allowedFormats: ["jpg", "png", "jpeg", "gif", "svg", "webp"],
   },
 });
@@ -36,4 +36,4 @@ const configCloudinary = () => {
   });
 };
 
-module.exports = { upload, deleteImgCloudinary, configCloudinary };
+module.exports = { upload, deleteImgCloudinary, configCloudinary, };
