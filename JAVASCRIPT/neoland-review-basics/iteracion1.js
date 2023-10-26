@@ -11,7 +11,7 @@ const movies = [
 const categorias = []
 
 for(item of movies){
-  for(category of item.categories){
+  for(category of item.categories){ //recorremos el array dentro del otro array
     if(!categorias.includes(category))
     categorias.push(category)
   }

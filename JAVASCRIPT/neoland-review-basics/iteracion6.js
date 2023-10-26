@@ -1,4 +1,4 @@
-function swap(array, x, y) {
+const swap=(array, x, y)=> {
 const intercambio = array[x]
 array[x]=array[y]
 array[y]=intercambio

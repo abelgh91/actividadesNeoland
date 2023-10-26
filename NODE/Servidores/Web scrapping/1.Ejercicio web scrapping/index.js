@@ -14,7 +14,8 @@ const scrapping = async (keyWord) => {
    // vamos a abrir una pagina en el navegador
 
    const page = await browser.newPage();
-
+   
+     // por si salta un cuadro de aceptar cookies
    page.on('dialog', async (dialog) => {
     if (dialog.type() === 'confirm') {
       await dialog.accept();

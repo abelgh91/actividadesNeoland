@@ -1,4 +1,4 @@
-function findArrayIndex(array, text) {
+const findArrayIndex =(array, text)  => {
     const index = array.indexOf(text);
     return index;
   }
