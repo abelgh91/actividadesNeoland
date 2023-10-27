@@ -189,10 +189,10 @@ const eliminarCharacter = async (req, res, next) => {
         const character = await Character.findByIdAndDelete(id);
         //hacemos el testing
         if(character){
-            const findByIdMovie = await Character.findById(id); // creamos esta funcion para ver si encuentra lo que hemos borrado
-            return res.status(findByIdMovie ? 404 : 200).json( // si existe es que no se ha borrado por tanto un 404
+            const findByIdCharacter = await Character.findById(id); // creamos esta funcion para ver si encuentra lo que hemos borrado
+            return res.status(findByIdCharacter ? 404 : 200).json( // si existe es que no se ha borrado por tanto un 404
                 {
-                    deleteTest: findByIdMovie ? false : true,
+                    deleteTest: findByIdCharacter ? false : true,
                 });
         }else{
             return res.status(404).json("Este character no existe 👎");
