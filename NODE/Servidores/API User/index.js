@@ -21,7 +21,7 @@ const PORT = process.env.PORT;
 const app = express();
 //esto pone las cors por defecto,luego podemos meterle nosotros algunas mas especificas
 const cors = require('cors');
-const userRoutes = require('./src/api/routes/User.routes');
+
 app.use(cors());
 
 //limitaciones de cantidad
@@ -29,7 +29,7 @@ app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ limit: '5mb', extended: false }));
 
 //creamos rutas. Tenemos que importar la funcion de las rutas cuando tengamos creado el archivo de las routes.
-
+const userRoutes = require('./src/api/routes/User.routes');
 app.use("/api/v1/users/", userRoutes)
 
 //creamos una funcion para que gestione cuando no encuentre la ruta(404) y otra para cuando crashee(500)

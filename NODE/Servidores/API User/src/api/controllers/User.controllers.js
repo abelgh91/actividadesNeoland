@@ -1,6 +1,8 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const randomCode = require("../../utils/randomCode");
 const user = require("../models/User.model");
+const nodemailer = require("nodemailer")
+
 
 const register =async (req, res, next) => {
     let catchImg = req.file?.path;
@@ -10,7 +12,7 @@ const register =async (req, res, next) => {
         const {name, email} = req.body;
 
         //comprobamos si el usuario existe
-        const userExist = await User.findOne(
+        const userExist = await user.findOne(
             { email: req.body.email },
             { name: req.body.name }
           );
@@ -47,13 +49,13 @@ const register =async (req, res, next) => {
             if (error) {
               console.log(error);
               return res.status(404).json({
-                user: userSave,
+                user: savedUser,
                 confirmationCode: 'error, resend code',
               });
             } else {
               console.log('Email sent: ' + info.response);
               return res.status(200).json({
-                user: userSave,
+                user: savedUser,
                 confirmationCode,
               });
             }

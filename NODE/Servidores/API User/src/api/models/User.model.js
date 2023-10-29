@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
 );
 
 //ANTES DE GUARDAR EL MODEL COGE LA CONTRASEÑA Y LE DA 10 VUELTAS PARA ENCRIPTARLA //HASHEAR
-UserSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
     try {
       this.password = await bcrypt.hash(this.password, 10);
       next(); //SIGUE
