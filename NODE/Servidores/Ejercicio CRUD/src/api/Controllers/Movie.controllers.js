@@ -210,10 +210,19 @@ const eliminarMovie = async (req, res, next) => {
 
         if(movie){
             const findByIdMovie = await Movie.findById(id); 
-    
-                return res.status(findByIdMovie ? 404 : 200).json({
+
+            try {
+                const test = await Character.updateMany(
+                    { movies: id },
+                    { $pull: { movies: id } }
+                  );
+                  console.log(test);
+
+                  return res.status(findByIdMovie ? 404 : 200).json({
                     deleteTest: findByIdMovie ? false : true,
                 });
+            } catch (error) {
+                }
         }else {
             return res.status(404).json("Esta movie no existe ❌")
         }
@@ -221,7 +230,5 @@ const eliminarMovie = async (req, res, next) => {
         return res.status(404).json(error);
     }
 };
-
-
 
 module.exports = {crearMovie, toggleCharacter, getById, getByName, getAll, update, eliminarMovie}
