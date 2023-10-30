@@ -8,13 +8,13 @@ const { verifyToken } = require('../utils/token');
 const dotenv = require('dotenv');
 dotenv.config();
 
-//---------- la primera funcion para saber de forma geneeral si estas autenticado ------------
+//---------- la primera funcion para saber si esta autenticado ------------
 
 const isAuth = async (req, res, next) => {
   /** el token se envia por las headers de la peticion
    * Y se envia como un Bearer token 
    * por eso lo primero que tenemos que hacer es reemplazar la palabra Bearer por un espacio vacio
-   * para luego JSON web token me lo reconozca correctamente sin la palabra bearer 
+   * para que luego JSON web token me lo reconozca correctamente sin la palabra bearer 
    */
   const token = req.headers.authorization?.replace('Bearer ', '');
 
