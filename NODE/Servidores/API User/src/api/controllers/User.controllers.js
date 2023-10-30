@@ -94,7 +94,7 @@ const registerEstado = async (req, res, next) => {
   let catchImg = req.files?.path;
   try {
     await user.syncIndexes(); //actualizamos
-    let confirmationCode = randomCode;
+    let confirmationCode = randomCode();
     const {name, email} = req.body; // del body nos quedamos con el email y el name y luego comparamos a ver si existe
     const userExist = await user.findOne(//buscamos si en user existe un email o un nombre igual
       {email : req.body.email},
@@ -220,7 +220,7 @@ const sendCode = async (req, res, next) => {
     // para buscar su correo y su codigo de confirmacion
 
     const { id } = req.params;
-    const userDB = await User.findById(id);
+    const userDB = await user.findById(id);
 
     const emailEnv = process.env.EMAIL;
     const password = process.env.PASSWORD;
@@ -273,7 +273,7 @@ const login = async (req, res, next) => {
     //recibimos por el body el email y la password
     const { email, password } = req.body;
     // vamos a buscar un usuario con ese email
-    const userDb = await User.findOne({ email });
+    const userDb = await user.findOne({ email });
 
     // vamos a hacer un if else para ver si existe o no
 
