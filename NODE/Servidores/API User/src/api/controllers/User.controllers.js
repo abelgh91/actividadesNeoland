@@ -27,7 +27,7 @@ const register =async (req, res, next) => {
               try {
                 const savedUser = await newUser.save();
                 if(savedUser){
-                    const emailEnv = process.env.MAIL
+                    const emailEnv = process.env.EMAIL
                     const password = process.env.PASSWORD;
 
           const transporter = nodemailer.createTransport({
