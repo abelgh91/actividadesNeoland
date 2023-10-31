@@ -10,14 +10,24 @@ const alumns = [
 ]
 
 
-for (let i = 0; i < alumns.length; i++) {
-const alumn = alumns[i];
-const trimestresAprobados = [alumn.T1, alumn.T2, alumn.T3].filter(aprobado => aprobado).length;
-alumn.isApproved = trimestresAprobados >= 2;
+const aprobado =(alumno)=>{
+  
+  let acc = 0
+  if (alumno["T1"]){ //le decimos que sume en cada trimetre
+    acc++
+  }
+  if(alumno["T2"] ){
+    acc++
+  }
+  if(alumno["T3"]){
+    acc++
+  }
+  
+  return acc>= 2 ? true : false //si el contador tiene 2 o mas true entonces sera true (aprobado)
 }
-console.log(alumns);
+const newArray = []
+for (let i = 0; i< alumns.length; i++){
+  newArray.push({...alumns[i],  isApproved: aprobado(alumns[i]) })
+}
 
-
-
-
-
+console.log(newArray) 
