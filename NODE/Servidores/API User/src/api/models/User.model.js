@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
     {
         email: {
             type: String,
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
 );
 
 //ANTES DE GUARDAR EL MODEL COGE LA CONTRASEÑA Y LE DA 10 VUELTAS PARA ENCRIPTARLA //HASHEAR
-userSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
     try {
       this.password = await bcrypt.hash(this.password, 10);
       next(); //SIGUE
@@ -60,5 +60,5 @@ userSchema.pre('save', async function (next) {
     }
   });
 
-  const user = mongoose.model(`user`, userSchema);
-  module.exports = user;
+  const User = mongoose.model(`user`, UserSchema);
+  module.exports = User;

@@ -3,7 +3,7 @@
   */
 
 // ------------> necesitamos el modelo porque necesitamos saber que rol tiene ese usuario
-const user = require('../api/models/User.model');
+const User = require('../api/models/User.model');
 const { verifyToken } = require('../utils/token');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -36,7 +36,7 @@ const isAuth = async (req, res, next) => {
      * req.user nos va a servir para saber que es un usuario autenticado porque para llegar a hacer la req.user hemos 
      * tenido que tener un token valido
     */
-    req.user = await user.findById(decoded.id);
+    req.user = await User.findById(decoded.id);
     next();
   } catch (error) {
     return next(error);
@@ -52,7 +52,7 @@ const isAuthAdmin = async (req, res, next) => {
 
   try {
     const decoded = verifyToken(token, process.env.JWT_SECRET);
-    req.user = await user.findById(decoded.id);
+    req.user = await User.findById(decoded.id);
     if (req.user.rol !== 'admin') {
       return next(new Error('Unauthorized, not admin'));
     }
