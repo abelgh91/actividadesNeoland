@@ -1,4 +1,4 @@
-const { getAll } = require("../Controllers/Character.controllers");
+const { getAll } = require("../Controllers/Movie.controllers");
 const { crearMovie, toggleCharacter, getById, getByName, update, eliminarMovie } = require("../Controllers/Movie.controllers");
 
 const movieRoutes = require("express").Router();

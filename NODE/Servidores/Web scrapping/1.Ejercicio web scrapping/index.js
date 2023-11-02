@@ -26,23 +26,19 @@ const scrapping = async (keyWord) => {
 
    // una vez abierta la pagina hay que navegar hasta la url de BASE_URL
    await page.goto(BASE_URL);
- 
-   // esperamos un poco tiempo a que se cargen todos los elementos de la pagina
-   await page.waitForTimeout(6000); /// ----> vamos ac esperar 6 segundos
-
+   await page.waitForTimeout(4000);
    await page.click("#onetrust-accept-btn-handler");
-   await page.waitForTimeout(6000);
    await page.click(".button-search");
    await page.type(".button-search", keyWord);
    await page.keyboard.press("Enter");
-   await page.waitForTimeout(6000);
+   await page.waitForTimeout(4000);
 
    await page.evaluate(() => {
     const element = document.querySelector(".df-branding");
     const y = element.getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo({ top: y });
   });
-  await page.waitForTimeout(6000);
+  await page.waitForTimeout(4000);
   
   await page.waitForSelector(".df-card__main");
 
@@ -50,7 +46,7 @@ const scrapping = async (keyWord) => {
 
   nodes.map((n)=>({
     title: n.querySelector(".df-card__title")?.innerText,
-    image: n.querySelector("img.df-card__image")?.src,
+    image: n.querySelector(".df-card__image")?.src,
     price: n.querySelector(".df-card__price")?.innerText,
   })),
   );

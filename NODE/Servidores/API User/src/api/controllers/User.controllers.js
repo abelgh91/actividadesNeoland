@@ -744,7 +744,7 @@ const deleteUser = async (req, res, next) => {
     // hacemos el metodo con el id del req.user
     // el optional channing va a salvaguardar que no rompa en caso de no haber req.user
     await User.findByIdAndDelete(req.user?._id);
-    // si ya hemos borrado el usuario borramos de cloudinary su imagen
+    // si ya hemos borrado el usuario borramos su imagen
     deleteImgCloudinary(req.user?.image);
 
     // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista

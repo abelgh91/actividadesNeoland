@@ -124,7 +124,7 @@ const update = async (req, res, next) => {
             const bodyCliente = {
                 _id: characterById._id,
                 image: req.file?.path ? takeImage : imgAntigua,
-                name: req.body?.path ? req.body?.path : characterById.name,
+                name: req.body?.name ? req.body?.name : characterById.name,
             };
             //hacemos lo mismo con el genero
             if(req.body?.gender){
