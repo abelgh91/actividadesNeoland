@@ -10,6 +10,8 @@ const setError = require("../../helpers/handle-error");
 const randomPassword = require("../../utils/randomPassword");
 const validator = require('validator');
 const enumOk = require('../../utils/enumOk');
+const Parque = require("../models/Parque.model");
+const Ave = require("../models/Ave.model");
 
 
 //  ------------------REGISTER LARGO--------------------------
@@ -747,11 +749,35 @@ const deleteUser = async (req, res, next) => {
     // si ya hemos borrado el usuario borramos su imagen
     deleteImgCloudinary(req.user?.image);
 
-    // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
-    const existUser = await User.findById(req.user?._id);
-    return res.status(existUser ? 404 : 200).json({
-      deleteTest: existUser ? false : true,
-    });
+    try {
+      await Parque.updateMany(
+        { likes: req.user?._id },
+        { $pull: { likes: req.user?._id } }
+      );
+
+        try {
+          await Ave.updateMany(
+            { likes: req.user?._id },
+            { $pull: { likes: req.user?._id } }
+          );
+          // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
+           const existUser = await User.findById(req.user?._id);
+           return res.status(existUser ? 404 : 200).json({
+           deleteTest: existUser ? false : true,
+           });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Ave',
+            message: error.message,
+          });
+          }
+
+    } catch (error) {
+      return res.status(404).json({
+        error: 'error catch update Parque',
+        message: error.message,
+      });
+    }
   } catch (error) {
     return next(setError(500, error.message || 'Error general to DELETE'));
   }
