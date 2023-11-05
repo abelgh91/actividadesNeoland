@@ -1,5 +1,8 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
+const Ave = require("../models/Ave.model");
 const Parque = require("../models/Parque.model");
+const User = require("../models/User.model");
+
 
 
 //-----------------CREAR---------------------
