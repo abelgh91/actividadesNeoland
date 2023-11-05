@@ -11,7 +11,7 @@ const Parque = require("../models/Parque.model");
 
 const ParqueRoutes = require("express").Router()
 
-ParqueRoutes.post('crear', upload.single('image'), crearParque);
+ParqueRoutes.post('/crear', upload.single('image'), crearParque);
 ParqueRoutes.get('/:id', getById);
 ParqueRoutes.get('/:name', getByName);
 ParqueRoutes.get('/', getAll);
