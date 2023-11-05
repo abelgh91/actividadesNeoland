@@ -351,7 +351,6 @@ const autoLogin = async (req, res, next) => {
   }
 };
 
-
 //----------------------RESEND CODE-------------------
 
 const resendCode = async (req, res, next) => {
@@ -554,6 +553,61 @@ const sendPassword = async (req, res, next) => {
     return next(
       setError(500, error.message || 'Error general to sendPassword NO AUTH')
     );
+  }
+};
+
+//-------------GET BY ID-------------------
+
+const getById = async (req, res, next) => {
+  try {
+      //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
+      // en una funcion el id que hemos encontrado
+      const {id} = req.params;
+      const userById = await User.findById(id)
+      if(userById){
+          return res.status(200).json(userById)
+      }else{
+          return res.status(404).json("No ha sido posible encontrar el user solicitado👎")
+      }
+  } catch (error) {
+      return res.status(404).json(error.message)
+  }
+};
+
+//-----------------GET BY NAME----------------
+
+const getByName = async (req, res, next) => {
+  try {
+      const {name} = req.params;
+      const userByName = await User.find({name});
+      if (userByName.length > 0){
+          return res.status(200).json(userByName);
+      }else {
+          return res.status(404).json("No se ha podido encontrar el user 👎")
+      }
+  } catch (error) {
+      return res.status(404).json({
+          error: "error al buscar por nombre. Ha sido pillado en el catch 👮‍♂️",
+          message: error.message,
+      });
+  }
+};
+
+//---------------GET ALL----------------
+
+const getAll = async (req, res, next) => {
+  try {
+      const allUser = await User.find();
+      if(allUser.length > 0) {
+          return res.status(200).json(allUser);
+      }else{
+          return res.status(404).json("No ha sido posible encontrar el user")
+      }
+  } catch (error) {
+      return res.status(404).json({
+          error: "error al buscar. Lo ha pillado el catch 👮‍♂️",
+          message: error.message,
+      })
   }
 };
 
@@ -767,14 +821,14 @@ const deleteUser = async (req, res, next) => {
            });
         } catch (error) {
           return res.status(404).json({
-            error: 'error catch update Ave',
+            error: 'error catch delete Ave',
             message: error.message,
           });
           }
 
     } catch (error) {
       return res.status(404).json({
-        error: 'error catch update Parque',
+        error: 'error catch delete Parque',
         message: error.message,
       });
     }
@@ -783,5 +837,108 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+//! -----------------------------------------------------------------------------
+//? -------------------------------ADD FAV MOVIE---------------------------------
+//! -----------------------------------------------------------------------------
 
-module.exports = { register, registerEstado, registerWithRedirect, sendCode, login, exampleAuth, autoLogin, resendCode, checkNewUser, changePassword, sendPassword, modifyPassword, update, deleteUser };
+const addFavParque = async (req, res, next) => {
+  try {
+    /** vamos a recibir el idParque por el param y hacemos destructuring del req.user porque esto es autenticado */
+    const { idParque } = req.params;
+    const { _id, parqueFav } = req.user;
+    /** como es un toggle tenemos que comprobar que incluya o no el id del parque dentro de parqueFav que es un array del user autenticado */
+    if (parqueFav.includes(idParque)) {
+      ///-------------> PULL PARA SACAR EN EL ARRAY
+      try {
+        // actualizamos el usuario, primero la condicion (_id) y segundo la ejecucion {$pull ....}
+        await User.findByIdAndUpdate(_id, {
+          $pull: { parqueFav: idParque },
+        });
+
+        try {
+          // actualizamos el parque igual sacando el id del user
+          await Parque.findByIdAndUpdate(idParque, {
+            $pull: { likes: _id },
+          });
+
+          //! -------------------- respuesta----------------------
+
+          // la respuesta lanzamos los objetos actualizados para que veamos el valor actualizados de ambos
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            parqueUpdate: await Parque.findById(idParque),
+            action: `pull idParque ${idParque}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Parque pull',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User pull',
+          message: error.message,
+        });
+      }
+
+      // en caso de que no lo incluya lo que hacems es un push que es incluirlo en el array tanto para el user como para el parque
+    } else {
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { parqueFav: idParque },
+        });
+        try {
+          await Parque.findByIdAndUpdate(idParque, {
+            $push: { likes: _id },
+          });
+
+          //! ---------------------- respuesta -------------------------
+
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            parqueUpdate: await Parque.findById(idParque),
+            action: `push id Parque ${idParque}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Parque push',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User push',
+          message: error.message,
+        });
+      }
+      /// ------------> PUSH PARA METER EN EL ARRAY
+    }
+
+    // pensamos lo que tenemos que actualizar
+    // ----> 1) Parque ----> array likes ---> necesitamos el id del parque ----> id del user lo sacamos del req.user
+    // ----> 2) User  ----> array parqueFav -> necesitamos el id del parque ----> id del user lo sacamos del req.user
+  } catch (error) {
+    return next(setError(500, error.message || 'Error general to DELETE'));
+  }
+};
+
+module.exports = { 
+  register, 
+  registerEstado, 
+  registerWithRedirect, 
+  sendCode, 
+  login, 
+  exampleAuth, 
+  autoLogin, 
+  resendCode, 
+  checkNewUser, 
+  changePassword, 
+  sendPassword, 
+  modifyPassword, 
+  update, 
+  deleteUser, 
+  addFavParque, 
+  getById, 
+  getByName, 
+  getAll };

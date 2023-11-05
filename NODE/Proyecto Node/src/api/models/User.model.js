@@ -44,6 +44,12 @@ const UserSchema = new mongoose.Schema(
           image: {
             type: String,
           },
+            parqueFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Parque" }],
+            aveFav:  [{ type: mongoose.Schema.Types.ObjectId, ref: "Ave" }],
+            parqueVisitado:  [{ type: mongoose.Schema.Types.ObjectId, ref: "Parque" }],
+            aveVistas:  [{ type: mongoose.Schema.Types.ObjectId, ref: "Ave" }],
+            followers:  [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+            followed:  [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }] 
     },
     {
         timestamps: true,
