@@ -9,7 +9,7 @@ const { generateToken } = require("../../utils/token");
 const setError = require("../../helpers/handle-error");
 const randomPassword = require("../../utils/randomPassword");
 const validator = require('validator');
-const enumOk = require('../../utils/enumOk');
+const enumGenderOk = require('../../utils/enumOk');
 const Parque = require("../models/Parque.model");
 const Ave = require("../models/Ave.model");
 
@@ -701,8 +701,8 @@ const update = async (req, res, next) => {
      */
     if (req.body?.gender) {
       // lo comprobamos y lo metermos en patchUser con un ternario en caso de que sea true o false el resultado de la funcion
-      const resultEnum = enumOk(req.body?.gender);
-      patchUser.gender = resultEnum.check ? req.body?.gender : req.user.gender;
+      const resultEnumGender = enumGenderOk(req.body?.gender);
+      patchUser.gender = resultEnumGender.check ? req.body?.gender : req.user.gender;
     }
 
     try {
