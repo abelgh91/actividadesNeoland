@@ -1,4 +1,4 @@
-const { isAuth } = require("../../middleware/auth.middleware");
+const { isAuth, isAuthAdmin } = require("../../middleware/auth.middleware");
 const { upload } = require("../../middleware/files.middleware");
 const {register, 
     registerEstado, 
@@ -17,9 +17,15 @@ const {register,
     addFavParque, 
     getById, 
     getByName, 
-    getAll
+    getAll,
+    addFavAve,
+    addParqueVisitado,
+    addAveVista,
+    getLikesParque,
+    getLikesAves
 } = require("../controllers/User.controllers");
 const User = require("../models/User.model");
+
 
 const UserRoutes = require("express").Router()
 
@@ -38,9 +44,14 @@ UserRoutes.get("/", getAll);
 //---------------controladores autenticados
 UserRoutes.get("/pruebas", [isAuth], exampleAuth);
 UserRoutes.patch('/changepassword', [isAuth], modifyPassword);
-UserRoutes.patch('/update/update', [isAuth], upload.single('image'), update);
-UserRoutes.delete('/', [isAuth], deleteUser);
+UserRoutes.patch('/update/update', [isAuthAdmin], upload.single('image'), update);
+UserRoutes.delete('/', [isAuthAdmin], deleteUser);
 UserRoutes.patch('/addfavparque', [isAuth], addFavParque);
+UserRoutes.patch('/addfavave', [isAuth], addFavAve);
+UserRoutes.patch('/addparquevisitado', [isAuth], addParqueVisitado);
+UserRoutes.patch('/addavevista', [isAuth], addAveVista);
+UserRoutes.get('/verlikesparques', [isAuth], getLikesParque);
+UserRoutes.get('/verlikesaves', [isAuth], getLikesAves);
 
 // ----------> controladores que se utilizan con redirect
 UserRoutes.post("/register/sendMail/:id", sendCode);

@@ -119,4 +119,4 @@ const preguntasRespuestas = [{
     "correcta" : "respuesta3"
   },]
 
-  module.exports = preguntasRespuestas;
+  export const preguntas = () => preguntasRespuestas();

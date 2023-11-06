@@ -1,3 +1,4 @@
+const { isAuthAdmin } = require("../../middleware/auth.middleware");
 const { upload } = require("../../middleware/files.middleware");
 const {
     crearParque, 
@@ -6,17 +7,25 @@ const {
     getAll, 
     update, 
     deleteParque,
+    getCCAA,
+    getProvincia, 
+    getMasAves
 } = require("../controllers/Parque.controllers");
+
 const Parque = require("../models/Parque.model");
 
 const ParqueRoutes = require("express").Router()
 
 ParqueRoutes.post('/crear', upload.single('image'), crearParque);
 ParqueRoutes.get('/:id', getById);
-ParqueRoutes.get('/:name', getByName);
+ParqueRoutes.get('/name/:name', getByName);
 ParqueRoutes.get('/', getAll);
-ParqueRoutes.patch('/update/update', upload.single('image'), update);
+ParqueRoutes.get('/CCAA/:CCAA', getCCAA);
+ParqueRoutes.get('/provincia/provincia/:provincia', getProvincia);
+ParqueRoutes.get('/parquemasaves/parquemasaves', getMasAves);
 
-ParqueRoutes.delete('/', deleteParque); // No se si tiene que tener autenticacion
+//-------------CON AUTENTICACION-----------
+ParqueRoutes.patch('/update/update', [isAuthAdmin], upload.single('image'), update);
+ParqueRoutes.delete('/', [isAuthAdmin], deleteParque);
 
 module.exports = ParqueRoutes;

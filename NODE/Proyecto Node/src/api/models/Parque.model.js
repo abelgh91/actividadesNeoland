@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
-const validator = require("validator");
 
 const SchemaParque = new Schema(
     {
@@ -9,7 +8,6 @@ const SchemaParque = new Schema(
             required: true,
             trim: true,
             unique: true,
-            validate: [validator.isEmail, 'Email not valid'],
         },
         image: {
             type: String,
@@ -29,7 +27,11 @@ const SchemaParque = new Schema(
         },
         likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
         visitado: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-        aves: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ave" }],
+        aves: {
+            type: String,
+            required: false,
+            trim: true
+        },
     },
     {
         timestamps: true,

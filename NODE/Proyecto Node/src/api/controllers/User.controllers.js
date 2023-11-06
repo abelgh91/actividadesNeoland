@@ -838,7 +838,7 @@ const deleteUser = async (req, res, next) => {
 };
 
 //! -----------------------------------------------------------------------------
-//? -------------------------------ADD FAV MOVIE---------------------------------
+//? -------------------------------ADD FAV PARQUE--------------------------------
 //! -----------------------------------------------------------------------------
 
 const addFavParque = async (req, res, next) => {
@@ -923,6 +923,331 @@ const addFavParque = async (req, res, next) => {
   }
 };
 
+
+//! -----------------------------------------------------------------------------
+//? -------------------------------ADD FAV AVE-----------------------------------
+//! -----------------------------------------------------------------------------
+
+const addFavAve = async (req, res, next) => {
+  try {
+    /** vamos a recibir el idaVE por el param y hacemos destructuring del req.user porque esto es autenticado */
+    const { idAve } = req.params;
+    const { _id, aveFav } = req.user;
+    /** como es un toggle tenemos que comprobar que incluya o no el id del ave dentro de aveFav que es un array del user autenticado */
+    if (aveFav.includes(idAve)) {
+      ///-------------> PULL PARA SACAR EN EL ARRAY
+      try {
+        // actualizamos el usuario, primero la condicion (_id) y segundo la ejecucion {$pull ....}
+        await User.findByIdAndUpdate(_id, {
+          $pull: { aveFav: idAve },
+        });
+
+        try {
+          // actualizamos el ave igual sacando el id del user
+          await Ave.findByIdAndUpdate(idAve, {
+            $pull: { likes: _id },
+          });
+
+          //! -------------------- respuesta----------------------
+
+          // la respuesta lanzamos los objetos actualizados para que veamos el valor actualizados de ambos
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            aveUpdate: await Ave.findById(idAve),
+            action: `pull idAve ${idAve}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Ave pull',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User pull',
+          message: error.message,
+        });
+      }
+
+      // en caso de que no lo incluya lo que hacemos es un push que es incluirlo en el array tanto para el user como para el ave
+    } else {
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { aveFav: idAve },
+        });
+        try {
+          await Ave.findByIdAndUpdate(idAve, {
+            $push: { likes: _id },
+          });
+
+          //! ---------------------- respuesta -------------------------
+
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            aveUpdate: await Ave.findById(idAve),
+            action: `push id Ave ${idAve}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Ave push',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User push',
+          message: error.message,
+        });
+      }
+      /// ------------> PUSH PARA METER EN EL ARRAY
+    }
+
+    // pensamos lo que tenemos que actualizar
+    // ----> 1) Ave ----> array likes ---> necesitamos el id del ave ----> id del user lo sacamos del req.user
+    // ----> 2) User  ----> array aveFav -> necesitamos el id del ave ----> id del user lo sacamos del req.user
+  } catch (error) {
+    return next(setError(500, error.message || 'Error general to DELETE'));
+  }
+};
+
+//---------------------ADD PARQUE VISITADO---------------------------
+
+const addParqueVisitado = async (req, res, next) => {
+  try {
+    /** vamos a recibir el idParque por el param y hacemos destructuring del req.user porque esto es autenticado */
+    const { idParque } = req.params;
+    const { _id, parqueVisitado } = req.user;
+    /** como es un toggle tenemos que comprobar que incluya o no el id del parque dentro de parqueVisitado que es un array del user autenticado */
+    if (parqueVisitado.includes(idParque)) {
+      ///-------------> PULL PARA SACAR EN EL ARRAY
+      try {
+        // actualizamos el usuario, primero la condicion (_id) y segundo la ejecucion {$pull ....}
+        await User.findByIdAndUpdate(_id, {
+          $pull: { parqueVisitado: idParque },
+        });
+
+        try {
+          // actualizamos el parque igual sacando el id del user
+          await Parque.findByIdAndUpdate(idParque, {
+            $pull: { visitado: _id },
+          });
+
+          //! -------------------- respuesta----------------------
+
+          // la respuesta lanzamos los objetos actualizados para que veamos el valor actualizados de ambos
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            parqueUpdate: await Parque.findById(idParque),
+            action: `pull idParque ${idParque}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Parque pull',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User pull',
+          message: error.message,
+        });
+      }
+
+      // en caso de que no lo incluya lo que hacemos es un push que es incluirlo en el array tanto para el user como para el parque
+    } else {
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { parqueVisitado: idParque },
+        });
+        try {
+          await Parque.findByIdAndUpdate(idParque, {
+            $push: { visitado: _id },
+          });
+
+          //! ---------------------- respuesta -------------------------
+
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            parqueUpdate: await Parque.findById(idParque),
+            action: `push id Parque ${idParque}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Parque push',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User push',
+          message: error.message,
+        });
+      }
+      /// ------------> PUSH PARA METER EN EL ARRAY
+    }
+
+    // pensamos lo que tenemos que actualizar
+    // ----> 1) Parque ----> array visitado ---> necesitamos el id del parque ----> id del user lo sacamos del req.user
+    // ----> 2) User  ----> array parqueVisitado -> necesitamos el id del parque ----> id del user lo sacamos del req.user
+  } catch (error) {
+    return next(setError(500, error.message || 'Error general to DELETE'));
+  }
+};
+
+//--------------------------ADD AVE VISTA-------------------------
+
+const addAveVista = async (req, res, next) => {
+  try {
+    /** vamos a recibir el idaVE por el param y hacemos destructuring del req.user porque esto es autenticado */
+    const { idAve } = req.params;
+    const { _id, aveVistas } = req.user;
+    /** como es un toggle tenemos que comprobar que incluya o no el id del ave dentro de aveFav que es un array del user autenticado */
+    if (aveVistas.includes(idAve)) {
+      ///-------------> PULL PARA SACAR EN EL ARRAY
+      try {
+        // actualizamos el usuario, primero la condicion (_id) y segundo la ejecucion {$pull ....}
+        await User.findByIdAndUpdate(_id, {
+          $pull: { aveVistas: idAve },
+        });
+
+        try {
+          // actualizamos el ave igual sacando el id del user
+          await Ave.findByIdAndUpdate(idAve, {
+            $pull: { visto: _id },
+          });
+
+          //! -------------------- respuesta----------------------
+
+          // la respuesta lanzamos los objetos actualizados para que veamos el valor actualizados de ambos
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            aveUpdate: await Ave.findById(idAve),
+            action: `pull idAve ${idAve}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Ave pull',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User pull',
+          message: error.message,
+        });
+      }
+
+      // en caso de que no lo incluya lo que hacemos es un push que es incluirlo en el array tanto para el user como para el ave
+    } else {
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { aveVistas: idAve },
+        });
+        try {
+          await Ave.findByIdAndUpdate(idAve, {
+            $push: { visto: _id },
+          });
+
+          //! ---------------------- respuesta -------------------------
+
+          return res.status(200).json({
+            userUpdate: await User.findById(_id),
+            aveUpdate: await Ave.findById(idAve),
+            action: `push id Ave ${idAve}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update Ave push',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update User push',
+          message: error.message,
+        });
+      }
+      /// ------------> PUSH PARA METER EN EL ARRAY
+    }
+
+    // pensamos lo que tenemos que actualizar
+    // ----> 1) Ave ----> array visto ---> necesitamos el id del ave ----> id del user lo sacamos del req.user
+    // ----> 2) User  ----> array aveVistas -> necesitamos el id del ave ----> id del user lo sacamos del req.user
+  } catch (error) {
+    return next(setError(500, error.message || 'Error general to DELETE'));
+  }
+};
+
+//--------------------GET VER LIKES PARQUES-------------------
+
+const getLikesParque = async (req, res, next) => {
+  try {
+      //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
+      // en una funcion el id que hemos encontrado
+      const {id} = req.params
+      const userById = await User.findById(id)
+      const FavParquesUser = userById.parqueFav
+      const verLikesParques = await Parque.find({_id: FavParquesUser})
+      return res.status(verLikesParques.length > 0 ? 200 : 404).json(verLikesParques.length > 0 ? verLikesParques : 'No se han encontrado parques favoritos del User ❌')
+  } catch (error) {
+      return res.status(404).json(error.message)
+  }
+};
+
+//-----------------GET VER LIKES AVES -------------------
+
+const getLikesAves = async (req, res, next) => {
+  try {
+      //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
+      // en una funcion el id que hemos encontrado
+      const {id} = req.params
+      const userById = await User.findById(id)
+      const FavAvesUser = userById.aveFav
+      const verLikesAves = await Ave.find({_id: FavAvesUser})
+      return res.status(verLikesAves.length > 0 ? 200 : 404).json(verLikesAves.length > 0 ? verLikesAves : 'No se han encontrado aves favoritas del User ❌')
+  } catch (error) {
+      return res.status(404).json(error.message)
+  }
+};
+
+//--------------FOLLOWERS --------------- //no se hacerlo
+
+const follow = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const {_id } = req.user
+    if(followers.includes(_id)){
+      try {
+        await User.findByIdAndUpdate(id, {
+          $pull: { followers: _id },
+        });
+        return res.status(200).json({
+          userUpdate: await User.findById(id),
+          action: `pull id ${_id}`,
+        });
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update followers pull',
+          message: error.message,
+        });
+      }
+    }else{
+      await User.findByIdAndUpdate(id, {
+        $push: { followers: _id },
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      error: 'error catch update followers push',
+      message: error.message,
+    });
+  }
+};
+
+//----------------SORT NUMERO DE FOLLOWERS------------- //por hacer
+
+
+
 module.exports = { 
   register, 
   registerEstado, 
@@ -941,4 +1266,10 @@ module.exports = {
   addFavParque, 
   getById, 
   getByName, 
-  getAll };
+  getAll,
+  addFavAve, 
+  addParqueVisitado, 
+  addAveVista, 
+  getLikesParque, 
+  getLikesAves, 
+  follow };

@@ -207,4 +207,67 @@ const deleteParque = async (req, res, next) => {
     }
   };
 
-module.exports = { crearParque, getById, getByName, getAll, update, deleteParque }
+  //------------GET POR CCAA----------
+
+  const getCCAA = async (req, res, next) => {
+    try {
+        const {CCAA} = req.params;
+        const getParqueCCAA = await Parque.find({CCAA});
+        if (getParqueCCAA.length > 0){
+            return res.status(200).json(getParqueCCAA);
+        }else {
+            return res.status(404).json("No se ha podido encontrar 👎")
+        }
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar por CCAA. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+};
+
+//----------------GET POR PROVINCIA----------
+
+const getProvincia = async (req, res, next) => {
+    try {
+        const {provincia} = req.params;
+        const getParqueProvincia = await Parque.find({provincia});
+        if (getParqueProvincia.length > 0){
+            return res.status(200).json(getParqueProvincia);
+        }else {
+            return res.status(404).json("No se ha podido encontrar 👎")
+        }
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar por CCAA. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+};
+
+//------------GET MAS AVES--------------------
+
+const getMasAves = async (req, res, next) => {
+    try {
+        const allParques = await Parque.find();
+        let longitudMaxima = 0
+        let nombreParque = ""
+        for(let parque of allParques){
+            if(parque.aves.length > longitudMaxima){
+                longitudMaxima = parque.aves.length
+                nombreParque = parque.name
+            }
+        }
+        console.log(nombreParque)
+        parqueEncontradoporName = await Parque.find({name: nombreParque})
+        res.status(200).json(parqueEncontradoporName)
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar el parque con mas aves. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+};
+
+
+module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves }

@@ -205,11 +205,35 @@ const deleteAve = async (req, res, next) => {
     }
   };
 
+  //-----------GET PELIGRO DE EXTINCION-------------
+
+  const avesPeligro = async (req, res, next) => {
+
+    try {
+        const allAves = await Ave.find()
+        let peligroExtincion = ","
+
+        for(let ave of allAves){
+            if(ave.peligro == true){
+            peligroExtincion.push(ave.peligro)
+        }
+        }
+        aveEncontradaPorPeligro = await Ave.find({peligro: peligroExtincion})
+        res.status(200).json(aveEncontradaPorPeligro)
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar el ave en peligro de extincion. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+  }
+
 module.exports = {
     crearAve, 
     getAll, 
     getById, 
     getByName, 
     update,
-    deleteAve
+    deleteAve,
+    avesPeligro,
 }
