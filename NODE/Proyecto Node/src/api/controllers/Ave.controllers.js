@@ -114,6 +114,8 @@ const update = async (req, res, next) => {
                 name: req.body?.name ? req.body?.name : aveById.name,
                 peligro: req.body?.peligro ? req.body?.peligro : aveById.peligro,
                 age: req.body?.age ? req.body?.age : aveById.age,
+                provincia: req.body?.provincia ? req.body?.provincia : aveById.provincia,
+                CCAA: req.body?.CCAA ? req.body?.CCAA : aveById.CCAA,
             };
             try {
                 await Ave.findByIdAndUpdate(id, bodyCliente);
@@ -268,6 +270,44 @@ const getAge = async (req, res, next) => {
     }
 };
 
+//-------------GET POR PROVINCIA--------------
+
+const getPorProvincia = async (req, res, next) => {
+    try {
+        const {provincia} = req.params;
+        const avePorProvincia = await Ave.find({provincia});
+        if (avePorProvincia.length > 0){
+            return res.status(200).json(avePorProvincia);
+        }else {
+            return res.status(404).json("No se ha podido encontrar el ave 👎")
+        }
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar por provincia. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+};
+
+//----------------GET BY CCAA----------------
+
+const getPorCCAA = async (req, res, next) => {
+    try {
+        const {CCAA} = req.params;
+        const avePorCCAA = await Ave.find({CCAA});
+        if (avePorCCAA.length > 0){
+            return res.status(200).json(avePorCCAA);
+        }else {
+            return res.status(404).json("No se ha podido encontrar el ave 👎")
+        }
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar por CCAA. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+};
+
 module.exports = {
     crearAve, 
     getAll, 
@@ -277,5 +317,7 @@ module.exports = {
     deleteAve,
     avesPeligro,
     getTipos,
-    getAge
+    getAge, 
+    getPorProvincia,
+    getPorCCAA
 }
