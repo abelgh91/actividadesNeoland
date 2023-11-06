@@ -1,4 +1,4 @@
-const { isAuthAdmin } = require("../../middleware/auth.middleware");
+const { isAuthAdmin, isAuth } = require("../../middleware/auth.middleware");
 const { upload } = require("../../middleware/files.middleware");
 const {
     crearParque, 
@@ -25,7 +25,7 @@ ParqueRoutes.get('/provincia/provincia/:provincia', getProvincia);
 ParqueRoutes.get('/parquemasaves/parquemasaves', getMasAves);
 
 //-------------CON AUTENTICACION-----------
-ParqueRoutes.patch('/update/update', [isAuthAdmin], upload.single('image'), update);
-ParqueRoutes.delete('/', [isAuthAdmin], deleteParque);
+ParqueRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);
+ParqueRoutes.delete('/', [isAuth], deleteParque);
 
 module.exports = ParqueRoutes;

@@ -112,6 +112,8 @@ const update = async (req, res, next) => {
                 _id: aveById._id,
                 image: req.file?.path ? takeImage : imgAntigua,
                 name: req.body?.name ? req.body?.name : aveById.name,
+                peligro: req.body?.peligro ? req.body?.peligro : aveById.peligro,
+                age: req.body?.age ? req.body?.age : aveById.age,
             };
             try {
                 await Ave.findByIdAndUpdate(id, bodyCliente);
@@ -211,7 +213,7 @@ const deleteAve = async (req, res, next) => {
 
     try {
         const allAves = await Ave.find()
-        let peligroExtincion = ","
+        let peligroExtincion = []
 
         for(let ave of allAves){
             if(ave.peligro == true){
@@ -228,6 +230,44 @@ const deleteAve = async (req, res, next) => {
     }
   }
 
+  //-------------GET POR TYPES--------------- //tiene enum
+
+  const getTipos = async (req, res, next) => {
+    try {
+        const {types} = req.params;
+        const avePorTipo = await Ave.find({types});
+        if (avePorTipo.length > 0){
+            return res.status(200).json(avePorTipo);
+        }else {
+            return res.status(404).json("No se ha podido encontrar el ave 👎")
+        }
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar por tipo. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+};
+
+//----------------GET POR AGE---------------
+
+const getAge = async (req, res, next) => {
+    try {
+        const {age} = req.params;
+        const avePorAge = await Ave.find({age});
+        if (avePorAge.length > 0){
+            return res.status(200).json(avePorAge);
+        }else {
+            return res.status(404).json("No se ha podido encontrar el ave 👎")
+        }
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar por edad. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+};
+
 module.exports = {
     crearAve, 
     getAll, 
@@ -236,4 +276,6 @@ module.exports = {
     update,
     deleteAve,
     avesPeligro,
+    getTipos,
+    getAge
 }

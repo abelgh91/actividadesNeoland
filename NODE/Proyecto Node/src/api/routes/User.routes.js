@@ -44,7 +44,7 @@ UserRoutes.get("/", getAll);
 //---------------controladores autenticados
 UserRoutes.get("/pruebas", [isAuth], exampleAuth);
 UserRoutes.patch('/changepassword', [isAuth], modifyPassword);
-UserRoutes.patch('/update/update', [isAuthAdmin], upload.single('image'), update);
+UserRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);
 UserRoutes.delete('/', [isAuthAdmin], deleteUser);
 UserRoutes.patch('/addfavparque', [isAuth], addFavParque);
 UserRoutes.patch('/addfavave', [isAuth], addFavAve);
