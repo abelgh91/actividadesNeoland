@@ -34,10 +34,10 @@ const SchemaAve = new Schema(
             type: Boolean,
             default: false
         },
-        parque: {
+        parque: [{
             type: String,
-            trim: true
-        },
+            trim: true  
+        }],
         CCAA: {
             type: String,
             enum: ['Andalucia', 'Canarias', 'Catalunya', 'Baleares', 'Aragon', 'Asturias', 'Cantabria', 'Castilla y Leon', 'Castilla y la Mancha', 'Galicia', 'Madrid', 'Extremadura'],

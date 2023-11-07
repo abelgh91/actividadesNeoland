@@ -1210,21 +1210,32 @@ const getLikesAves = async (req, res, next) => {
   }
 };
 
-//--------------FOLLOWERS --------------- //no se hacerlo
+//--------------FOLLOWERS --------------- 
 
 const follow = async (req, res, next) => {
   try {
     const { id } = req.params
-    const {_id } = req.user
-    if(followers.includes(_id)){
+    const {_id, followed } = req.user 
+    if(followed.includes(id)){
       try {
-        await User.findByIdAndUpdate(id, {
-          $pull: { followers: _id },
+        await User.findByIdAndUpdate(_id, {
+          $pull: { followed: id },
         });
-        return res.status(200).json({
-          userUpdate: await User.findById(id),
-          action: `pull id ${_id}`,
-        });
+        try {
+          await User.findByIdAndUpdate(id, {
+            $pull: { followers: _id },
+          });
+          return res.status(200).json({
+            userFollowed: await User.findById(id),
+            userFollow: await User.findById(_id),
+            action: `pull id ${id}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update followers pull',
+            message: error.message,
+          });
+        }
       } catch (error) {
         return res.status(404).json({
           error: 'error catch update followers pull',
@@ -1232,9 +1243,31 @@ const follow = async (req, res, next) => {
         });
       }
     }else{
-      await User.findByIdAndUpdate(id, {
-        $push: { followers: _id },
-      });
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { followed: id },
+        });
+        try {
+          await User.findByIdAndUpdate(id, {
+            $push: { followers: _id },
+          });
+          return res.status(200).json({
+            userFollowed: await User.findById(id),
+            userFollow: await User.findById(_id),
+            action: `push id ${id}`,
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: 'error catch update followers push',
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: 'error catch update followers push',
+          message: error.message,
+        });
+      }
     }
   } catch (error) {
     return res.status(404).json({
@@ -1244,9 +1277,21 @@ const follow = async (req, res, next) => {
   }
 };
 
-//----------------SORT NUMERO DE FOLLOWERS------------- //por hacer
+//----------------SORT NUMERO DE FOLLOWERS------------- 
 
-
+const sortFollowers = async (req, res, next) => {
+  try {
+    const allUsers = await User.find()
+    if(allUsers.length > 0){
+      allUsers.sort((a, b) => b.followers - a.followers)
+      return res.status(200).json(allUsers)
+    }else{
+      return res.status(404).json('error al ordenar por followers')
+    }
+  } catch (error) {
+    return next(setError(500, error,messsage || 'Error to find'))
+  }
+}
 
 module.exports = { 
   register, 
@@ -1272,4 +1317,5 @@ module.exports = {
   addAveVista, 
   getLikesParque, 
   getLikesAves, 
-  follow };
+  follow,
+  sortFollowers };

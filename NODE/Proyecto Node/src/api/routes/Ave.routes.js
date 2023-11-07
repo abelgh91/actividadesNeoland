@@ -1,6 +1,6 @@
 const { isAuthAdmin, isAuth } = require("../../middleware/auth.middleware");
 const { upload } = require("../../middleware/files.middleware");
-const { crearAve, getAll, getById, getByName, update, deleteAve, avesPeligro, getTipos, getAge, getPorProvincia, getPorCCAA } = require("../controllers/Ave.controllers");
+const { crearAve, getAll, getById, getByName, update, deleteAve, avesPeligro, getTipos, getAge, getPorProvincia, getPorCCAA, getPorLikes, getMasVistas,toggleAveParque } = require("../controllers/Ave.controllers");
 
 const Ave = require("../models/Ave.model");
 
@@ -15,6 +15,9 @@ AveRoutes.get('/types/:types', getTipos);
 AveRoutes.get('/age/:age', getAge);
 AveRoutes.get('/provincia/:provincia', getPorProvincia);
 AveRoutes.get('/CCAA/:CCAA', getPorCCAA);
+AveRoutes.get('/likes/getmorelikes', getPorLikes);
+AveRoutes.get('/vista/getmorevista', getMasVistas);
+AveRoutes.get('/toggleaveparque', toggleAveParque);
 
 //-------------AUTENTICADOS
 AveRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);

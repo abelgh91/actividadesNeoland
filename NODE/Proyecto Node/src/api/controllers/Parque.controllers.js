@@ -269,5 +269,120 @@ const getMasAves = async (req, res, next) => {
     }
 };
 
+//----------------TOGGLE PARQUE-AVE------------------
 
-module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves }
+const toggleParqueAve = async (req, res, next) => {
+    try {
+        const {idParque} = req.params;   // Buscamos el parque por Id
+        const {idAve} = req.body;  //Metemos el ave por el body
+
+        const aveById = await Ave.findById(idAve)  // Buscamos por id el ave
+
+        if(aveById.parque.includes(idParque)){
+            try {
+                await Parque.findByIdAndUpdate(idParque, {
+                    $pull: {aves: idAve},
+                });
+                try {
+                    await Ave.findByIdAndUpdate(idAve, {
+                        $pull: {parque: idParque}
+                    });
+                    return res.status(200).json({
+                        parqueUpdate: await Parque.findById(idParque),
+                        aveUpdate: await Ave.findById(idAve),
+                        action: `pull idAve ${idAve}`,
+                      });
+                } catch (error) {
+                    return res.status(404).json({
+                        error: 'error catch update ave pull',
+                        message: error.message,
+                      });
+                }
+            } catch (error) {
+                return res.status(404).json({
+                    error: 'error catch update Parque pull',
+                    message: error.message,
+                  });
+            }
+        }else{
+            try {
+                await Parque.findByIdAndUpdate(idParque, {
+                    $push: {aves: idAve},
+                });
+                try {
+                    await Ave.findByIdAndUpdate(idAve, {
+                        $push: {parque: idParque}
+                    });
+                    return res.status(200).json({
+                        parqueUpdate: await Parque.findById(idParque),
+                        aveUpdate: await Ave.findById(idAve),
+                        action: `push idAve ${idAve}`,
+                      });
+                } catch (error) {
+                    return res.status(404).json({
+                        error: 'error catch update ave push',
+                        message: error.message,
+                      });
+                }
+            } catch (error) {
+                return res.status(404).json({
+                    error: 'error catch update Parque push',
+                    message: error.message,
+                  });
+            }
+        }
+    } catch (error) {
+        return next(setError(500, error.message || 'Error general'));
+    }
+}
+
+//-----------------SORT SUPERFICIE-------------------
+
+const sortSuperficie = async (req, res, next) => {
+    try {
+        const allParques = await Parque.find()
+        if(allParques.length > 0){
+         allParques.sort((a, b)=> b.superficie - a.superficie)
+            return res.status(200).json(allParques)
+        }else{
+            return res.status(404).json('error al ordenar por superficie')
+        }
+    } catch (error) {
+        return next(setError(500, error.message || 'Error to find'))
+        }
+
+}
+
+//-----------------SORT POR LIKES--------------------
+
+const sortLikes = async (req, res, next) => {
+    try {
+        const allParques = await Parque.find()
+        if(allParques.length > 0){
+            allParques.sort((a, b) => b.likes - a.likes)
+            return res.status(200).json(allParques)
+        }else{
+            res.status(404).json('error al ordenar por likes')
+        }
+    } catch (error) {
+        return next(setError(500, error.message || 'Error to find'))
+    }
+}
+
+//-------------SORT MAS VISITADO-------------------
+
+const sortVisitado = async (req, res, next) => {
+    try {
+        const allParques = await Parque.find()
+        if(allParques.length > 0){
+            allParques.sort((a, b) => b.visitado - a.visitado)
+            return res.status(200).json(allParques)
+        }else{
+            return res.status(404).json('error al ordenar por visitado')
+        }
+    } catch (error) {
+        return next(setError(500, error,messsage || 'Error to find'))
+    }
+}
+
+module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves, toggleParqueAve, sortSuperficie, sortLikes, sortVisitado }

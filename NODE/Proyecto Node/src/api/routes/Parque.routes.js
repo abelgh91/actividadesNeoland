@@ -9,7 +9,11 @@ const {
     deleteParque,
     getCCAA,
     getProvincia, 
-    getMasAves
+    getMasAves,
+    toggleParqueAve,
+    sortSuperficie,
+    sortLikes,
+    sortVisitado
 } = require("../controllers/Parque.controllers");
 
 const Parque = require("../models/Parque.model");
@@ -23,6 +27,10 @@ ParqueRoutes.get('/', getAll);
 ParqueRoutes.get('/CCAA/:CCAA', getCCAA);
 ParqueRoutes.get('/provincia/provincia/:provincia', getProvincia);
 ParqueRoutes.get('/parquemasaves/parquemasaves', getMasAves);
+ParqueRoutes.patch('/toggleparqueave/:idParque', toggleParqueAve);
+ParqueRoutes.get('/sortsuperficie/sort', sortSuperficie);
+ParqueRoutes.get('/sortlikes/sort', sortLikes);
+ParqueRoutes.get('/sortvisitado/sort', sortVisitado);
 
 //-------------CON AUTENTICACION-----------
 ParqueRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);

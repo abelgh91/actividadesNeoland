@@ -111,11 +111,11 @@ const update = async (req, res, next) => {
             const bodyCliente = {
                 _id: aveById._id,
                 image: req.file?.path ? takeImage : imgAntigua,
-                name: req.body?.name ? req.body?.name : aveById.name,
-                peligro: req.body?.peligro ? req.body?.peligro : aveById.peligro,
-                age: req.body?.age ? req.body?.age : aveById.age,
-                provincia: req.body?.provincia ? req.body?.provincia : aveById.provincia,
-                CCAA: req.body?.CCAA ? req.body?.CCAA : aveById.CCAA,
+                name: req.body?.name ? req.body.name : aveById.name,
+                peligro: req.body?.peligro ? req.body.peligro : aveById.peligro,
+                age: req.body?.age ? req.body.age : aveById.age,
+                provincia: req.body?.provincia ? req.body.provincia : aveById.provincia,
+                CCAA: req.body?.CCAA ? req.body.CCAA : aveById.CCAA,
             };
             try {
                 await Ave.findByIdAndUpdate(id, bodyCliente);
@@ -128,7 +128,7 @@ const update = async (req, res, next) => {
             const elementoActualizado = Object.keys(req.body); // sacamos las claves para ver qué nos ha dicho que actualicemos
             let test = {};
             elementoActualizado.forEach((item)=>{
-                if(req.body[item] === elementoActualizadoById[item]){
+                if(req.body[item].toString() === elementoActualizadoById[item].toString()){
                     test[item] = true
                 }else {
                     test[item] = false
@@ -308,6 +308,121 @@ const getPorCCAA = async (req, res, next) => {
     }
 };
 
+//-------------GET MAS LIKES ---------------------
+
+const getPorLikes = async (req, res, next) => {
+    try {
+        const allAves = await Ave.find()
+    let numeroLikes = 0
+    let aveMasLikes = ''
+    for(let ave of allAves){
+        if(ave.likes.length > numeroLikes){
+            numeroLikes = ave.likes.length
+            aveMasLikes = ave.name
+        }
+    }
+    const aveEncontradaPorName = await Ave.findOne({name: aveMasLikes})
+    res.status(200).json(aveEncontradaPorName)
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar el ave con mas likes. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+
+}
+
+//----------------GET MAS VISTAS-----------------
+
+const getMasVistas = async (req, res, next) => {
+    try {
+        const allAves = await Ave.find()
+        let numeroAveVistas = 0
+        let aveMasVista = ''
+        for(let ave of allAves){
+            if(ave.visto.length > numeroAveVistas){
+                numeroAveVistas = ave.visto.length
+                aveMasVista = ave.name
+            }
+        }
+        const aveEncontradaPorName = await Ave.findOne({name: aveMasVista})
+        res.status(200).json(aveEncontradaPorName)
+    } catch (error) {
+        return res.status(404).json({
+            error: "error al buscar el ave mas vista. Ha sido pillado en el catch 👮‍♂️",
+            message: error.message,
+        });
+    }
+
+}
+
+//--------------TOGGLE AVE-PARQUE-----------------
+
+const toggleAveParque = async (req, res, next) => {
+    try {
+        const {idAve} = req.params
+        const {idParque} = req.body
+        const parqueById = await Parque.findById(idParque)
+
+        if(parqueById.aves.includes(idAve)){
+            try {
+                await Ave.findByIdAndUpdate(idAve, {
+                    $pull: {parque: idParque},
+                })
+                try {
+                    await Parque.findByIdAndUpdate(idParque, {
+                        $pull: {aves: idAve},
+                    })
+                    return res.status(200).json({
+                        aveUpdate: await Ave.findById(idAve),
+                        parqueUpdate: await Parque.findById(idParque),
+                        action: `pull idParque ${idParque}`,
+                    })
+                } catch (error) {
+                    return res.status(404).json({
+                        error: 'error catch update parque pull',
+                        message: error.message,
+                      });
+                }
+            } catch (error) {
+                return res.status(404).json({
+                    error: 'error catch update ave pull',
+                    message: error.message,
+                  });
+            }
+        }else{
+            try {
+                await Ave.findByIdAndUpdate(idAve, {
+                    $push: {parque: idParque},
+                });
+                try {
+                    await Parque.findByIdAndUpdate(idParque, {
+                        $push: {aves: idAve},
+                    })
+                    return res.status(200).json({
+                        aveUpdate: await Ave.findById(idAve),
+                        parqueUpdate: await Parque.findById(idParque),
+                        action: `push idParque ${idParque}`,
+                    })
+                } catch (error) {
+                    return res.status(404).json({
+                        error: 'error catch update parque push',
+                        message: error.message,
+                      });
+                }
+            } catch (error) {
+                return res.status(404).json({
+                    error: 'error catch update ave push',
+                    message: error.message,
+                  });
+            }
+        }
+    } catch (error) {
+        return next(setError(500, error.message || 'Error general'));
+    }
+
+}
+
 module.exports = {
     crearAve, 
     getAll, 
@@ -319,5 +434,8 @@ module.exports = {
     getTipos,
     getAge, 
     getPorProvincia,
-    getPorCCAA
+    getPorCCAA,
+    getPorLikes,
+    getMasVistas,
+    toggleAveParque
 }
