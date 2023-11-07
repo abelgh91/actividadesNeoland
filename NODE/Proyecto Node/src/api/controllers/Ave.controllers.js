@@ -116,6 +116,7 @@ const update = async (req, res, next) => {
                 age: req.body?.age ? req.body.age : aveById.age,
                 provincia: req.body?.provincia ? req.body.provincia : aveById.provincia,
                 CCAA: req.body?.CCAA ? req.body.CCAA : aveById.CCAA,
+                parque: req.body?.parque ? req.body?.parque : aveById.parque
             };
             try {
                 await Ave.findByIdAndUpdate(id, bodyCliente);
@@ -279,7 +280,7 @@ const getPorProvincia = async (req, res, next) => {
         if (avePorProvincia.length > 0){
             return res.status(200).json(avePorProvincia);
         }else {
-            return res.status(404).json("No se ha podido encontrar el ave 👎")
+            return res.status(404).json("No se han registrado aves en esta provincia 👎")
         }
     } catch (error) {
         return res.status(404).json({
@@ -298,7 +299,7 @@ const getPorCCAA = async (req, res, next) => {
         if (avePorCCAA.length > 0){
             return res.status(200).json(avePorCCAA);
         }else {
-            return res.status(404).json("No se ha podido encontrar el ave 👎")
+            return res.status(404).json("No se han registrado aves en esta CCAA👎")
         }
     } catch (error) {
         return res.status(404).json({

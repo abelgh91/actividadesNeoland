@@ -11,7 +11,7 @@ const SchemaAve = new Schema(
         },
         types: {
             type: String,
-            enum: ['rapaces', 'pajaros', 'corredoras', 'zancudas', 'gallinaceas', 'anseriformes', 'Sphenisciformes'],
+            enum: ['rapaces', 'pajaros', 'corredoras', 'zancudas', 'gallinaceas', 'anseriformes'],
             required: false,
             trim: true
         },

@@ -1178,33 +1178,50 @@ const addAveVista = async (req, res, next) => {
   }
 };
 
-//--------------------GET VER LIKES PARQUES-------------------
+//--------------------GET VER LIKES PARQUES------------------- 
 
-const getLikesParque = async (req, res, next) => {
+// const getLikesParque = async (req, res, next) => {
+//   try {
+//       const {_id} = req.user
+//       const userById = await User.findById(_id)
+//       .populate("parqueFav")
+//       if(userById){
+//         return res.status(200).json(userById)
+//       }else{
+//         return res.status(404).json("No es posible popular el parqueFav")
+//       }
+      
+//   } catch (error) {
+//       return res.status(404).json(error.message)
+//   }
+// };
+
+const getParquePorLikes = async (req, res, next) => {
   try {
-      //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
-      // en una funcion el id que hemos encontrado
-      const {id} = req.params
-      const userById = await User.findById(id)
-      const FavParquesUser = userById.parqueFav
-      const verLikesParques = await Parque.find({_id: FavParquesUser})
-      return res.status(verLikesParques.length > 0 ? 200 : 404).json(verLikesParques.length > 0 ? verLikesParques : 'No se han encontrado parques favoritos del User ❌')
+    const {parqueFav} = req.params;
+    const parquePorLike = await Parque.find({parqueFav})
+    if(parquePorLike.length > 0){
+      return res.status(200).json(parquePorLike)
+    }else{
+      return res.status(404).json("No hay parques favoritos ❌")
+    }
   } catch (error) {
-      return res.status(404).json(error.message)
+    return res.status(404).json(error.message)
   }
-};
+}
 
 //-----------------GET VER LIKES AVES -------------------
 
 const getLikesAves = async (req, res, next) => {
   try {
-      //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
-      // en una funcion el id que hemos encontrado
-      const {id} = req.params
-      const userById = await User.findById(id)
-      const FavAvesUser = userById.aveFav
-      const verLikesAves = await Ave.find({_id: FavAvesUser})
-      return res.status(verLikesAves.length > 0 ? 200 : 404).json(verLikesAves.length > 0 ? verLikesAves : 'No se han encontrado aves favoritas del User ❌')
+      const {_id} = req.user
+      const userById = await User.findById(_id)
+      .populate("aveFav")
+      if(userById){
+        return res.status(200).json(userById)
+      }else{
+        return res.status(404).json("No es posible popular el aveFav")
+      }
   } catch (error) {
       return res.status(404).json(error.message)
   }
@@ -1214,7 +1231,7 @@ const getLikesAves = async (req, res, next) => {
 
 const follow = async (req, res, next) => {
   try {
-    const { id } = req.params
+    const { id } = req.params //ESTE ID ES DE LA PERSONA QUE QUEREMOS VER SI SEGUIMOS O NO
     const {_id, followed } = req.user 
     if(followed.includes(id)){
       try {
@@ -1238,7 +1255,7 @@ const follow = async (req, res, next) => {
         }
       } catch (error) {
         return res.status(404).json({
-          error: 'error catch update followers pull',
+          error: 'error catch update followed pull',
           message: error.message,
         });
       }
@@ -1315,7 +1332,8 @@ module.exports = {
   addFavAve, 
   addParqueVisitado, 
   addAveVista, 
-  getLikesParque, 
+  // getLikesParque, 
   getLikesAves, 
   follow,
-  sortFollowers };
+  sortFollowers,
+  getParquePorLikes };

@@ -56,7 +56,7 @@ const create = async (req, res, next) => {
 const getById = async (req, res, next) => {
     try {
         //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
-        // en una funcion el id que hemos encontrado
+        //en una funcion el id que hemos encontrado
         const {id} = req.params;
         const characterById = await Character.findById(id)
         if(characterById){
@@ -128,7 +128,7 @@ const update = async (req, res, next) => {
             };
             //hacemos lo mismo con el genero
             if(req.body?.gender){
-                const resultEnum = enumOk(req.body?.gender)
+                const resultEnum = enumOk(req.body?.gender)  //viene de la funcion enumOk de utils
                 bodyCliente.gender = resultEnum.check ? req.body?.gender : characterById.gender;
             }
 

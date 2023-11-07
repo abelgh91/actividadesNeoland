@@ -24,7 +24,8 @@ const {register,
     getLikesParque,
     getLikesAves,
     follow,
-    sortFollowers
+    sortFollowers,
+    getParquePorLikes
 } = require("../controllers/User.controllers");
 const User = require("../models/User.model");
 
@@ -40,7 +41,7 @@ UserRoutes.post('/resend', resendCode);
 UserRoutes.post('/check', checkNewUser);
 UserRoutes.patch('/forgotpassword/forgotpassword', changePassword);
 UserRoutes.get("/:id", getById);
-UserRoutes.get("/:name", getByName);
+UserRoutes.get("/name/:name", getByName);
 UserRoutes.get("/", getAll);
 UserRoutes.get("/sortfollowers/sort", sortFollowers);
 
@@ -51,11 +52,12 @@ UserRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);
 UserRoutes.delete('/', [isAuthAdmin], deleteUser);
 UserRoutes.patch('/addfavparque/:idParque', [isAuth], addFavParque);
 UserRoutes.patch('/addfavave/:idAve', [isAuth], addFavAve);
-UserRoutes.patch('/addparquevisitado', [isAuth], addParqueVisitado);
+UserRoutes.patch('/addparquevisitado/:idParque', [isAuth], addParqueVisitado);
 UserRoutes.patch('/addavevista/:idAve', [isAuth], addAveVista);
-UserRoutes.get('/verlikesparques', [isAuth], getLikesParque);
-UserRoutes.get('/verlikesaves', [isAuth], getLikesAves);
+// UserRoutes.get('/verlikesparques/parques', [isAuth], getLikesParque);
+UserRoutes.get('/verlikesaves/aves', [isAuth], getLikesAves);
 UserRoutes.patch('/follow/:id', [isAuth], follow);
+UserRoutes.get('/parqueporlikes/likes', [isAuth], getParquePorLikes);
 
 // ----------> controladores que se utilizan con redirect
 UserRoutes.post("/register/sendMail/:id", sendCode);
