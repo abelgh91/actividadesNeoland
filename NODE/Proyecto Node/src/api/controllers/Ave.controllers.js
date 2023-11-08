@@ -99,6 +99,7 @@ const getAll = async (req, res, next) => {
 
 const update = async (req, res, next) => {
     //actualizamos 
+    console.log(req.body)
     await Ave.syncIndexes();
     let takeImage = req.file?.path;
     try {
@@ -129,10 +130,19 @@ const update = async (req, res, next) => {
             const elementoActualizado = Object.keys(req.body); // sacamos las claves para ver qué nos ha dicho que actualicemos
             let test = {};
             elementoActualizado.forEach((item)=>{
-                if(req.body[item].toString() === elementoActualizadoById[item].toString()){
-                    test[item] = true
-                }else {
-                    test[item] = false
+                //si el tipo de elementoactualizadobyid es un boolean lo convertimos toString, sino no
+                if(typeof elementoActualizadoById[item] == 'boolean'){
+                    if(req.body[item].toString() == elementoActualizadoById[item].toString()){
+                        test[item] = true
+                    }else {
+                        test[item] = false
+                    }
+                }else{
+                    if(req.body[item] == elementoActualizadoById[item]){
+                        test[item] = true
+                    }else {
+                        test[item] = false
+                    }
                 }
             });
             if(takeImage){
@@ -142,7 +152,7 @@ const update = async (req, res, next) => {
             //hacemos un contador y recorremos con for in porque es un objeto
 
             let acc = 0;
-            for(clave in test){
+            for(let clave in test){
                 test[clave] == false && acc++;
             }
             if(acc > 0){
@@ -157,12 +167,14 @@ const update = async (req, res, next) => {
                 });
             }
 
-            } catch (error) {}
+            } catch (error) {
+                return res.status(404).json(error.message);
+            }
         }else{
             return res.status(404).json("Este ave no existe 👎")
         }
     } catch (error) {
-        return res.status(404).json(error);
+        return res.status(404).json(error.message);
     }
 };
 
@@ -354,7 +366,6 @@ const getMasVistas = async (req, res, next) => {
             message: error.message,
         });
     }
-
 }
 
 //--------------TOGGLE AVE-PARQUE-----------------
