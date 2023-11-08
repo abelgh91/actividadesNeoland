@@ -127,10 +127,19 @@ const update = async (req, res, next) => {
             const elementoActualizado = Object.keys(req.body); // sacamos las claves para ver qué nos ha dicho que actualicemos
             let test = {};
             elementoActualizado.forEach((item)=>{
-                if(req.body[item] === elementoActualizadoById[item]){
-                    test[item] = true
-                }else {
-                    test[item] = false
+                //si el tipo de elementoactualizadobyid es un boolean lo convertimos toString, sino no
+                if(typeof elementoActualizadoById[item] == 'boolean'){
+                    if(req.body[item].toString() == elementoActualizadoById[item].toString()){
+                        test[item] = true
+                    }else {
+                        test[item] = false
+                    }
+                }else{
+                    if(req.body[item] == elementoActualizadoById[item]){
+                        test[item] = true
+                    }else {
+                        test[item] = false
+                    }
                 }
             });
             if(takeImage){
@@ -270,6 +279,35 @@ const getMasAves = async (req, res, next) => {
     }
 };
 
+//-------------GET PARQUE POR LIKES---------------
+
+const getParquePorLikes = async (req, res, next) => {
+    try {
+      const parquePorLike = await Parque.find()
+      if(parquePorLike.length > 0){
+        parquePorLike.sort((a, b) => b.likes - a.likes)
+        return res.status(200).json(parquePorLike)
+      }else{
+        return res.status(404).json("No hay parques favoritos ❌")
+      }
+    } catch (error) {
+      return res.status(404).json(error.message)
+    }
+  }
+
+//----------GET SOLO PARQUES CON LIKES -------------
+
+const getParqueConLikes = async (req, res, next) => {
+    try {
+      const parqueLikes = await Parque.find()
+      const parquesConLikes = parqueLikes.filter((parque) => parque.likes.length > 0)
+        return res.status(200).json(parquesConLikes)
+    
+    } catch (error) {
+      return res.status(404).json(error.message)
+    }
+  }
+
 //--------------GET MAS GRANDE----------------------
 
 const getMasSuperficie = async (req, res, next) => {
@@ -375,8 +413,9 @@ const sortLikes = async (req, res, next) => {
     try {
         const allParques = await Parque.find()
         if(allParques.length > 0){
-            allParques.sort((a, b) => b.likes - a.likes)
-            return res.status(200).json(allParques)
+            allParques.sort((a, b) => b.likes.length - a.likes.length)
+            const parquesSort = allParques.sort((a, b) => b.likes.length - a.likes.length)
+            return res.status(200).json(parquesSort)
         }else{
             res.status(404).json('error al ordenar por likes')
         }
@@ -401,4 +440,4 @@ const sortVisitado = async (req, res, next) => {
     }
 }
 
-module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves, toggleParqueAve, sortSuperficie, sortLikes, sortVisitado, getMasSuperficie }
+module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves, toggleParqueAve, sortSuperficie, sortLikes, sortVisitado, getMasSuperficie, getParquePorLikes, getParqueConLikes }

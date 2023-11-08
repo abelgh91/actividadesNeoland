@@ -14,7 +14,9 @@ const {
     sortSuperficie,
     sortLikes,
     sortVisitado,
-    getMasSuperficie
+    getMasSuperficie, 
+    getParquePorLikes,
+    getParqueConLikes,
 } = require("../controllers/Parque.controllers");
 
 const Parque = require("../models/Parque.model");
@@ -33,6 +35,8 @@ ParqueRoutes.get('/sortsuperficie/sort', sortSuperficie);
 ParqueRoutes.get('/sortlikes/sort', sortLikes);
 ParqueRoutes.get('/sortvisitado/sort', sortVisitado);
 ParqueRoutes.get('/massuperficie/superficie', getMasSuperficie);
+ParqueRoutes.get('/parqueporlikes/likes', getParquePorLikes);
+ParqueRoutes.get('/parqueconlikes/likes', getParqueConLikes);
 
 //-------------CON AUTENTICACION-----------
 ParqueRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);

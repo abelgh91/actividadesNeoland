@@ -1178,37 +1178,23 @@ const addAveVista = async (req, res, next) => {
   }
 };
 
-//--------------------GET VER LIKES PARQUES------------------- 
+//--------------------GET VER LIKES PARQUES------------------- // ESTO DA EL OBJETO COMPLETO DEL USUARIO LOGADO CON LA INFO DE LOS PARQUES COMPLETA
 
-// const getLikesParque = async (req, res, next) => {
-//   try {
-//       const {_id} = req.user
-//       const userById = await User.findById(_id)
-//       .populate("parqueFav")
-//       if(userById){
-//         return res.status(200).json(userById)
-//       }else{
-//         return res.status(404).json("No es posible popular el parqueFav")
-//       }
-      
-//   } catch (error) {
-//       return res.status(404).json(error.message)
-//   }
-// };
-
-const getParquePorLikes = async (req, res, next) => {
+const getLikesParque = async (req, res, next) => {
   try {
-    const {parqueFav} = req.params;
-    const parquePorLike = await Parque.find({parqueFav})
-    if(parquePorLike.length > 0){
-      return res.status(200).json(parquePorLike)
-    }else{
-      return res.status(404).json("No hay parques favoritos ❌")
-    }
+      const {_id} = req.user
+      const userById = await User.findById(_id)
+      .populate("parqueFav")
+      if(userById){
+        return res.status(200).json(userById)
+      }else{
+        return res.status(404).json("No es posible popular el parqueFav")
+      }
+      
   } catch (error) {
-    return res.status(404).json(error.message)
+      return res.status(404).json(error.message)
   }
-}
+};
 
 //-----------------GET VER LIKES AVES -------------------
 
@@ -1332,8 +1318,8 @@ module.exports = {
   addFavAve, 
   addParqueVisitado, 
   addAveVista, 
-  // getLikesParque, 
+  getLikesParque, 
   getLikesAves, 
   follow,
   sortFollowers,
-  getParquePorLikes };
+};

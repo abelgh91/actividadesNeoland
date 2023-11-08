@@ -321,21 +321,15 @@ const getPorCCAA = async (req, res, next) => {
     }
 };
 
-//-------------GET MAS LIKES ---------------------
+//-------------GET MAS LIKES ---------------------SORT
 
 const getPorLikes = async (req, res, next) => {
     try {
         const allAves = await Ave.find()
-    let numeroLikes = 0
-    let aveMasLikes = ''
-    for(let ave of allAves){
-        if(ave.likes.length > numeroLikes){
-            numeroLikes = ave.likes.length
-            aveMasLikes = ave.name
-        }
+    if(allAves.length > 0){
+        allAves.sort((a, b) => b.likes - a.likes)
     }
-    const aveEncontradaPorName = await Ave.findOne({name: aveMasLikes})
-    res.status(200).json(aveEncontradaPorName)
+    res.status(200).json(allAves)
     } catch (error) {
         return res.status(404).json({
             error: "error al buscar el ave con mas likes. Ha sido pillado en el catch 👮‍♂️",

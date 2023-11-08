@@ -54,10 +54,10 @@ UserRoutes.patch('/addfavparque/:idParque', [isAuth], addFavParque);
 UserRoutes.patch('/addfavave/:idAve', [isAuth], addFavAve);
 UserRoutes.patch('/addparquevisitado/:idParque', [isAuth], addParqueVisitado);
 UserRoutes.patch('/addavevista/:idAve', [isAuth], addAveVista);
-// UserRoutes.get('/verlikesparques/parques', [isAuth], getLikesParque);
 UserRoutes.get('/verlikesaves/aves', [isAuth], getLikesAves);
 UserRoutes.patch('/follow/:id', [isAuth], follow);
-UserRoutes.get('/parqueporlikes/likes', [isAuth], getParquePorLikes);
+
+UserRoutes.get('/verlikesparques/parques', [isAuth], getLikesParque);
 
 // ----------> controladores que se utilizan con redirect
 UserRoutes.post("/register/sendMail/:id", sendCode);
