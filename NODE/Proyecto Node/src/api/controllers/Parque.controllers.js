@@ -189,10 +189,14 @@ const deleteParque = async (req, res, next) => {
           { parqueFav: req.user?._id },
           { $pull: { parqueFav: req.user?._id } }
         );
+        await User.updateMany(
+            {parqueVisitado: req.user?._id},
+            {$pull: {parqueVisitado: req.user?._id}}
+        );
           try {
             await Ave.updateMany(
-              { likes: req.user?._id },
-              { $pull: { likes: req.user?._id } }
+              { parque: req.user?._id },
+              { $pull: { parque: req.user?._id } }
             );
             // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
              const existParque = await Parque.findById(req.user?._id);

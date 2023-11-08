@@ -194,6 +194,10 @@ const deleteAve = async (req, res, next) => {
           { aveFav: req.user?._id },
           { $pull: { aveFav: req.user?._id } }
         );
+        await User.updateMany(
+            { aveVistas: req.user?._id },
+            { $pull: { aveVistas: req.user?._id } }
+          );
           try {
             await Parque.updateMany(
               { aves: req.user?._id },

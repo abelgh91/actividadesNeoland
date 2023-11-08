@@ -808,12 +808,20 @@ const deleteUser = async (req, res, next) => {
         { likes: req.user?._id },
         { $pull: { likes: req.user?._id } }
       );
+      await Parque.updateMany(
+        {visitado: req.user?._id},
+        {$pull: {visitado: req.user?._id}}
+      )
 
         try {
           await Ave.updateMany(
             { likes: req.user?._id },
             { $pull: { likes: req.user?._id } }
           );
+          await Ave.updateMany(
+            {visto: req.user?._id},
+            {$pull: {visto: req.user?._id}}
+          )
           // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
            const existUser = await User.findById(req.user?._id);
            return res.status(existUser ? 404 : 200).json({
