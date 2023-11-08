@@ -114,6 +114,7 @@ const update = async (req, res, next) => {
                 _id: parqueById._id,
                 image: req.file?.path ? takeImage : imgAntigua,
                 name: req.body?.name ? req.body?.name : parqueById.name,
+                superficie: req.body?.superficie ? req.body?.superficie : parqueById.superficie
             };
             try {
                 await Parque.findByIdAndUpdate(id, bodyCliente);
@@ -269,6 +270,22 @@ const getMasAves = async (req, res, next) => {
     }
 };
 
+//--------------GET MAS GRANDE----------------------
+
+const getMasSuperficie = async (req, res, next) => {
+    try {
+        const allParques = await Parque.find()
+        if(allParques.length > 0){
+         allParques.sort((a, b) => b.superficie - a.superficie)
+            return res.status(200).json(allParques[0])
+        }else{
+            return res.status(404).json('error al traer el mas grande')
+        }
+    } catch (error) {
+        return next(setError(500, error.message || 'Error to find'))
+        }
+}
+
 //----------------TOGGLE PARQUE-AVE------------------
 
 const toggleParqueAve = async (req, res, next) => {
@@ -342,7 +359,7 @@ const sortSuperficie = async (req, res, next) => {
     try {
         const allParques = await Parque.find()
         if(allParques.length > 0){
-         allParques.sort((a, b)=> b.superficie - a.superficie)
+         allParques.sort((a, b) => b.superficie - a.superficie)
             return res.status(200).json(allParques)
         }else{
             return res.status(404).json('error al ordenar por superficie')
@@ -350,7 +367,6 @@ const sortSuperficie = async (req, res, next) => {
     } catch (error) {
         return next(setError(500, error.message || 'Error to find'))
         }
-
 }
 
 //-----------------SORT POR LIKES--------------------
@@ -385,4 +401,4 @@ const sortVisitado = async (req, res, next) => {
     }
 }
 
-module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves, toggleParqueAve, sortSuperficie, sortLikes, sortVisitado }
+module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves, toggleParqueAve, sortSuperficie, sortLikes, sortVisitado, getMasSuperficie }

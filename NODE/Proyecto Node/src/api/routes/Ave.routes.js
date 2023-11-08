@@ -9,7 +9,7 @@ const AveRoutes = require("express").Router();
 AveRoutes.post('/crear', upload.single('image'), crearAve);
 AveRoutes.get('/', getAll);
 AveRoutes.get('/:id', getById);
-AveRoutes.get('/:name', getByName);
+AveRoutes.get('/name/:especie', getByName);
 AveRoutes.get('/peligro/peligro', avesPeligro);
 AveRoutes.get('/types/:types', getTipos);
 AveRoutes.get('/age/:age', getAge);
@@ -17,7 +17,7 @@ AveRoutes.get('/provincia/:provincia', getPorProvincia);
 AveRoutes.get('/CCAA/:CCAA', getPorCCAA);
 AveRoutes.get('/likes/getmorelikes', getPorLikes);
 AveRoutes.get('/vista/getmorevista', getMasVistas);
-AveRoutes.get('/toggleaveparque', toggleAveParque);
+AveRoutes.patch('/toggleaveparque/:idAve', toggleAveParque);
 
 //-------------AUTENTICADOS
 AveRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);

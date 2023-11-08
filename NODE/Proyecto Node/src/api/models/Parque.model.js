@@ -23,7 +23,7 @@ const SchemaParque = new Schema(
             required: false,
         },
         superficie: {
-            type: String,
+            type: Number,
         },
         likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
         visitado: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],

@@ -62,8 +62,8 @@ const getById = async (req, res, next) => {
 
 const getByName = async (req, res, next) => {
     try {
-        const {name} = req.params;
-        const aveByName = await Ave.find({name});
+        const {especie} = req.params;
+        const aveByName = await Ave.find({especie});
         if (aveByName.length > 0){
             return res.status(200).json(aveByName);
         }else {
@@ -233,7 +233,7 @@ const deleteAve = async (req, res, next) => {
     }
   }
 
-  //-------------GET POR TYPES--------------- //tiene enum
+  //-------------GET POR TYPES--------------- 
 
   const getTipos = async (req, res, next) => {
     try {
