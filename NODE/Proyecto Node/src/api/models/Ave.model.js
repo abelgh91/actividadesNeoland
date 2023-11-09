@@ -34,10 +34,7 @@ const SchemaAve = new Schema(
             type: Boolean,
             default: false
         },
-        parque: [{
-            type: String,
-            trim: true  
-        }],
+        parque: [{ type: mongoose.Schema.Types.ObjectId, ref: "Parque" }],
         CCAA: {
             type: String,
             enum: ['Andalucia', 'Canarias', 'Catalunya', 'Baleares', 'Aragon', 'Asturias', 'Cantabria', 'Castilla y Leon', 'Castilla y la Mancha', 'Galicia', 'Madrid', 'Extremadura'],

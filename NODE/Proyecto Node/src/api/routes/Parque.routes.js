@@ -30,7 +30,7 @@ ParqueRoutes.get('/', getAll);
 ParqueRoutes.get('/CCAA/:CCAA', getCCAA);
 ParqueRoutes.get('/provincia/provincia/:provincia', getProvincia);
 ParqueRoutes.get('/parquemasaves/parquemasaves', getMasAves);
-ParqueRoutes.patch('/toggleparqueave/:idParque', toggleParqueAve);
+ParqueRoutes.patch('/toggleparqueave/:id', toggleParqueAve);
 ParqueRoutes.get('/sortsuperficie/sort', sortSuperficie);
 ParqueRoutes.get('/sortlikes/sort', sortLikes);
 ParqueRoutes.get('/sortvisitado/sort', sortVisitado);

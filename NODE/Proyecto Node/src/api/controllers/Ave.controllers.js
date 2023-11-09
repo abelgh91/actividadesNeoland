@@ -372,23 +372,23 @@ const getMasVistas = async (req, res, next) => {
 
 const toggleAveParque = async (req, res, next) => {
     try {
-        const {idAve} = req.params
-        const {idParque} = req.body
-        const parqueById = await Parque.findById(idParque)
+        const {id} = req.params
+        const {parques} = req.body
+        const parqueById = await Parque.findById(parques)
 
-        if(parqueById.aves.includes(idAve)){
+        if(parqueById.aves.includes(id)){
             try {
-                await Ave.findByIdAndUpdate(idAve, {
-                    $pull: {parque: idParque},
+                await Ave.findByIdAndUpdate(id, {
+                    $pull: {parque: parques},
                 })
                 try {
-                    await Parque.findByIdAndUpdate(idParque, {
-                        $pull: {aves: idAve},
+                    await Parque.findByIdAndUpdate(parques, {
+                        $pull: {aves: id},
                     })
                     return res.status(200).json({
-                        aveUpdate: await Ave.findById(idAve),
-                        parqueUpdate: await Parque.findById(idParque),
-                        action: `pull idParque ${idParque}`,
+                        aveUpdate: await Ave.findById(id),
+                        parqueUpdate: await Parque.findById(parques),
+                        action: `pull idParque ${parques}`,
                     })
                 } catch (error) {
                     return res.status(404).json({
@@ -404,17 +404,17 @@ const toggleAveParque = async (req, res, next) => {
             }
         }else{
             try {
-                await Ave.findByIdAndUpdate(idAve, {
-                    $push: {parque: idParque},
+                await Ave.findByIdAndUpdate(id, {
+                    $push: {parque: parques},
                 });
                 try {
-                    await Parque.findByIdAndUpdate(idParque, {
-                        $push: {aves: idAve},
+                    await Parque.findByIdAndUpdate(parques, {
+                        $push: {aves: id},
                     })
                     return res.status(200).json({
-                        aveUpdate: await Ave.findById(idAve),
-                        parqueUpdate: await Parque.findById(idParque),
-                        action: `push idParque ${idParque}`,
+                        aveUpdate: await Ave.findById(id),
+                        parqueUpdate: await Parque.findById(parques),
+                        action: `push parques ${parques}`,
                     })
                 } catch (error) {
                     return res.status(404).json({

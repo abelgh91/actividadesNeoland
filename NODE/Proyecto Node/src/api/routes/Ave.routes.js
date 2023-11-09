@@ -17,7 +17,7 @@ AveRoutes.get('/provincia/:provincia', getPorProvincia);
 AveRoutes.get('/CCAA/:CCAA', getPorCCAA);
 AveRoutes.get('/likes/getmorelikes', getPorLikes);
 AveRoutes.get('/vista/getmorevista', getMasVistas);
-AveRoutes.patch('/toggleaveparque/:idAve', toggleAveParque);
+AveRoutes.patch('/toggleaveparque/:id', toggleAveParque);
 
 //-------------AUTENTICADOS
 AveRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);

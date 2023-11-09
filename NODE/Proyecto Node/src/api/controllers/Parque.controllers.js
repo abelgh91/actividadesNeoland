@@ -178,7 +178,7 @@ const update = async (req, res, next) => {
 const deleteParque = async (req, res, next) => {
     try {
         const {id} = req.params
-      const parque = await Parque.findByIdAndDelete(id);
+        const parque = await Parque.findByIdAndDelete(id);
       // si ya hemos borrado el parque borramos su imagen
       deleteImgCloudinary(req.user?.image);
       if(parque){
@@ -334,24 +334,24 @@ const getMasSuperficie = async (req, res, next) => {
 
 const toggleParqueAve = async (req, res, next) => {
     try {
-        const {idParque} = req.params;   // Buscamos el parque por Id
-        const {idAve} = req.body;  //Metemos el ave por el body
+        const {id} = req.params;   // Buscamos el parque por Id
+        const {aves} = req.body;  //Metemos las aves por el body
 
-        const aveById = await Ave.findById(idAve)  // Buscamos por id el ave
+        const aveById = await Ave.findById(aves)  // Buscamos por id el ave
 
-        if(aveById.parque.includes(idParque)){
+        if(aveById.parque.includes(id)){
             try {
-                await Parque.findByIdAndUpdate(idParque, {
-                    $pull: {aves: idAve},
+                await Parque.findByIdAndUpdate(id, {
+                    $pull: {aves: aves},
                 });
                 try {
-                    await Ave.findByIdAndUpdate(idAve, {
-                        $pull: {parque: idParque}
+                    await Ave.findByIdAndUpdate(aves, {
+                        $pull: {parque: id}
                     });
                     return res.status(200).json({
-                        parqueUpdate: await Parque.findById(idParque),
-                        aveUpdate: await Ave.findById(idAve),
-                        action: `pull idAve ${idAve}`,
+                        parqueUpdate: await Parque.findById(id),
+                        aveUpdate: await Ave.findById(aves),
+                        action: `pull aves ${aves}`,
                       });
                 } catch (error) {
                     return res.status(404).json({
@@ -367,17 +367,17 @@ const toggleParqueAve = async (req, res, next) => {
             }
         }else{
             try {
-                await Parque.findByIdAndUpdate(idParque, {
-                    $push: {aves: idAve},
+                await Parque.findByIdAndUpdate(id, {
+                    $push: {aves: aves},
                 });
                 try {
-                    await Ave.findByIdAndUpdate(idAve, {
-                        $push: {parque: idParque}
+                    await Ave.findByIdAndUpdate(aves, {
+                        $push: {parque: id}
                     });
                     return res.status(200).json({
-                        parqueUpdate: await Parque.findById(idParque),
-                        aveUpdate: await Ave.findById(idAve),
-                        action: `push idAve ${idAve}`,
+                        parqueUpdate: await Parque.findById(id),
+                        aveUpdate: await Ave.findById(aves),
+                        action: `push idAve ${aves}`,
                       });
                 } catch (error) {
                     return res.status(404).json({
