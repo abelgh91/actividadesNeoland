@@ -373,22 +373,22 @@ const getMasVistas = async (req, res, next) => {
 const toggleAveParque = async (req, res, next) => {
     try {
         const {id} = req.params
-        const {parques} = req.body
-        const parqueById = await Parque.findById(parques)
+        const {parque} = req.body
+        const aveById = await Ave.findById(id)
 
-        if(parqueById.aves.includes(id)){
+        if(aveById.parque.includes(parque)){
             try {
                 await Ave.findByIdAndUpdate(id, {
-                    $pull: {parque: parques},
+                    $pull: {parque: parque},
                 })
                 try {
-                    await Parque.findByIdAndUpdate(parques, {
+                    await Parque.findByIdAndUpdate(parque, {
                         $pull: {aves: id},
                     })
                     return res.status(200).json({
                         aveUpdate: await Ave.findById(id),
-                        parqueUpdate: await Parque.findById(parques),
-                        action: `pull idParque ${parques}`,
+                        parqueUpdate: await Parque.findById(parque),
+                        action: `pull idParque ${parque}`,
                     })
                 } catch (error) {
                     return res.status(404).json({
@@ -405,16 +405,16 @@ const toggleAveParque = async (req, res, next) => {
         }else{
             try {
                 await Ave.findByIdAndUpdate(id, {
-                    $push: {parque: parques},
+                    $push: {parque: parque},
                 });
                 try {
-                    await Parque.findByIdAndUpdate(parques, {
+                    await Parque.findByIdAndUpdate(parque, {
                         $push: {aves: id},
                     })
                     return res.status(200).json({
                         aveUpdate: await Ave.findById(id),
-                        parqueUpdate: await Parque.findById(parques),
-                        action: `push parques ${parques}`,
+                        parqueUpdate: await Parque.findById(parque),
+                        action: `push parque ${parque}`,
                     })
                 } catch (error) {
                     return res.status(404).json({
@@ -429,11 +429,12 @@ const toggleAveParque = async (req, res, next) => {
                   });
             }
         }
+       
     } catch (error) {
-        return next(setError(500, error.message || 'Error general'));
+        return (res.status(404).json({message: "Error en el catch del toggle", error: error.message}))
     }
 
-}
+};
 
 module.exports = {
     crearAve, 
@@ -451,3 +452,53 @@ module.exports = {
     getMasVistas,
     toggleAveParque
 }
+
+
+//-------------INTENTO SPLIT-------------
+
+// if(aveById){
+//     const arrayIdParques = parques.split(',')
+//     let parquesMetidos 
+//     Promise.all([
+//         parquesMetidos = arrayIdParques.map(async (parque) => {
+//             if(aveById.parque.includes(parque)) {
+//                 try {
+//                     await Ave.findByIdAndUpdate(id, {
+//                         $pull: {parque: parques}
+//                     })
+//                     try {
+//                         await Parque.findByIdAndUpdate(parque, {
+//                             $pull: { aves: id },
+//                         })
+//                     } catch (error) {
+//                         res.status(404).json({message: "Error al quitar el ave del parque", error: error.message})
+//                     }
+//                 } catch (error) {
+//                     res.status(404).json({message: "Error al quitar el parque del ave", error: error.message})
+//                 }
+//             }else{
+//                 try {
+//                     await Ave.findByIdAndUpdate(id, {
+//                         $push: {parque: parques}
+//                     })
+//                     try {
+//                         await Parque.findByIdAndUpdate(parque, {
+//                             $push: { aves: id },
+//                         })
+//                     } catch (error) {
+//                         res.status(404).json({message: "Error al meter el ave en el parque", error: error.message})
+//                     }
+//                 } catch (error) {
+//                     res.status(404).json({message: "Error al meter el parque en el ave", error: error.message})
+//                 }
+//             }
+//         }),
+
+//     ]).then(async () => {
+//         return res.status(200).json({
+//             dataUpdate: await Ave.findById(id).populate("parque")
+//         })
+//     })
+// }else{
+//     res.status(404).json("este ave no existe ❌")
+// }

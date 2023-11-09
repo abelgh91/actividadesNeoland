@@ -337,9 +337,9 @@ const toggleParqueAve = async (req, res, next) => {
         const {id} = req.params;   // Buscamos el parque por Id
         const {aves} = req.body;  //Metemos las aves por el body
 
-        const aveById = await Ave.findById(aves)  // Buscamos por id el ave
+        const parqueById = await Parque.findById(id)  // Buscamos por id el parque
 
-        if(aveById.parque.includes(id)){
+        if(parqueById.aves.includes(aves)){
             try {
                 await Parque.findByIdAndUpdate(id, {
                     $pull: {aves: aves},
