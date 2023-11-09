@@ -177,47 +177,49 @@ const update = async (req, res, next) => {
 
 const deleteParque = async (req, res, next) => {
     try {
-      //! importante no hacer destructuring para si me mandan borrar un user con un token no valido no rompa
-      // hacemos el metodo con el id del req.user
-      // el optional channing va a salvaguardar que no rompa en caso de no haber req.user
-      await Parque.findByIdAndDelete(req.user?._id);
-      // si ya hemos borrado el usuario borramos su imagen
+        const {id} = req.params
+      const parque = await Parque.findByIdAndDelete(id);
+      // si ya hemos borrado el parque borramos su imagen
       deleteImgCloudinary(req.user?.image);
-  
-      try {
-        await User.updateMany(
-          { parqueFav: req.user?._id },
-          { $pull: { parqueFav: req.user?._id } }
-        );
-        await User.updateMany(
-            {parqueVisitado: req.user?._id},
-            {$pull: {parqueVisitado: req.user?._id}}
-        );
-          try {
-            await Ave.updateMany(
-              { parque: req.user?._id },
-              { $pull: { parque: req.user?._id } }
+      if(parque){
+        try {
+            const test = await User.updateMany(
+              { parqueFav: id },
+              { $pull: { parqueFav: id } }
             );
-            // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
-             const existParque = await Parque.findById(req.user?._id);
-             return res.status(existParque ? 404 : 200).json({
-             deleteTest: existParque ? false : true,
-             });
-          } catch (error) {
-            return res.status(404).json({
-              error: 'error catch delete Ave',
-              message: error.message,
-            });
-            }
-  
-      } catch (error) {
-        return res.status(404).json({
-          error: 'error catch delete User',
-          message: error.message,
-        });
+            const testTwo = await User.updateMany(
+                {parqueVisitado: id},
+                {$pull: {parqueVisitado: id}}
+            );
+              try {
+                const testThree = await Ave.updateMany(
+                  { parque: id },
+                  { $pull: { parque: id } }
+                );
+                
+              } catch (error) {
+                return res.status(404).json({
+                  error: 'error catch delete Ave',
+                  message: error.message,
+                });
+                }
+            } catch (error) {
+                return res.status(404).json({
+                  error: 'error catch delete User',
+                  message: error.message,
+                })};
+                
+                // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
+                const existParque = await Parque.findById(id);
+                return res.status(existParque ? 404 : 200).json({
+                deleteTest: existParque ? false : true,
+                }); 
+      
+      }else{
+        return res.status(404).json("este parque no existe ❌")
       }
     } catch (error) {
-      return next(setError(500, error.message || 'Error general to DELETE'));
+        return res.status(404).json(error);
     }
   };
 

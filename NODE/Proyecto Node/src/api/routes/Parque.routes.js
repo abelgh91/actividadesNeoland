@@ -40,6 +40,6 @@ ParqueRoutes.get('/parqueconlikes/likes', getParqueConLikes);
 
 //-------------CON AUTENTICACION-----------
 ParqueRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);
-ParqueRoutes.delete('/', [isAuth], deleteParque);
+ParqueRoutes.delete('/deleteparque/:id', [isAuth], deleteParque);
 
 module.exports = ParqueRoutes;
