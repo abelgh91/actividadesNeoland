@@ -291,7 +291,7 @@ const getParquePorLikes = async (req, res, next) => {
     try {
       const parquePorLike = await Parque.find()
       if(parquePorLike.length > 0){
-        parquePorLike.sort((a, b) => b.likes - a.likes)
+        parquePorLike.sort((a, b) => b.likes.length - a.likes.length)
         return res.status(200).json(parquePorLike)
       }else{
         return res.status(404).json("No hay parques favoritos ❌")
