@@ -14,8 +14,7 @@ const {
     sortSuperficie,
     sortLikes,
     sortVisitado,
-    getMasSuperficie, 
-    getParquePorLikes,
+    getMasSuperficie,
     getParqueConLikes,
 } = require('../controllers/Parque.controllers');
 

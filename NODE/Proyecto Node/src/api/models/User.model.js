@@ -49,7 +49,9 @@ const UserSchema = new mongoose.Schema(
             parqueVisitado:  [{ type: mongoose.Schema.Types.ObjectId, ref: "Parque" }],
             aveVistas:  [{ type: mongoose.Schema.Types.ObjectId, ref: "Ave" }],
             followers:  [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-            followed:  [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }] 
+            followed:  [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }] ,
+            comentarios: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comentario" }],
+            likesComentarios: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comentario" }]
     },
     {
         timestamps: true,

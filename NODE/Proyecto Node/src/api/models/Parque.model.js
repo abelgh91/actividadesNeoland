@@ -28,6 +28,7 @@ const SchemaParque = new Schema(
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     visitado: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     aves: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ave' }],
+    comentarios: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comentario" }]
   },
   {
     timestamps: true,
