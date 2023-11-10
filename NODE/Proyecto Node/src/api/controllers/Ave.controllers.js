@@ -105,6 +105,12 @@ const update = async (req, res, next) => {
     try {
         const {id} = req.params;
         const aveById = await Ave.findById(id);
+        const patchAve = new Ave(req.body);
+        // vamos a guardar info que no quiero que el usuario pueda cambiarme
+        patchAve.likes = req.ave.likes;
+        patchAve.visto = req.ave.visto;
+        patchAve.parque = req.ave.parque;
+        
         if (aveById){
             const imgAntigua = aveById.image;
 

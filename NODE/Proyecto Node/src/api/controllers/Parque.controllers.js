@@ -106,6 +106,12 @@ const update = async (req, res, next) => {
     try {
         const {id} = req.params;
         const parqueById = await Parque.findById(id);
+        const patchParque = new Parque(req.body);
+        // vamos a guardar info que no quiero que el usuario pueda cambiarme
+        patchParque.likes = req.parque.likes;
+        patchParque.visitado = req.parque.visitado;
+        patchParque.aves = req.parque.aves;
+
         if (parqueById){
             const imgAntigua = parqueById.image;
 
@@ -298,8 +304,7 @@ const getParqueConLikes = async (req, res, next) => {
     }
   }
 
-//--------------GET MAS GRANDE----------------------
-
+//--------------GET MAS GRANDE---------------------
 const getMasSuperficie = async (req, res, next) => {
     try {
         const allParques = await Parque.find()
