@@ -110,7 +110,7 @@ const update = async (req, res, next) => {
         patchAve.likes = req.ave.likes;
         patchAve.visto = req.ave.visto;
         patchAve.parque = req.ave.parque;
-        
+
         if (aveById){
             const imgAntigua = aveById.image;
 
@@ -458,53 +458,3 @@ module.exports = {
     getMasVistas,
     toggleAveParque
 }
-
-
-//-------------INTENTO SPLIT-------------
-
-// if(aveById){
-//     const arrayIdParques = parques.split(',')
-//     let parquesMetidos 
-//     Promise.all([
-//         parquesMetidos = arrayIdParques.map(async (parque) => {
-//             if(aveById.parque.includes(parque)) {
-//                 try {
-//                     await Ave.findByIdAndUpdate(id, {
-//                         $pull: {parque: parques}
-//                     })
-//                     try {
-//                         await Parque.findByIdAndUpdate(parque, {
-//                             $pull: { aves: id },
-//                         })
-//                     } catch (error) {
-//                         res.status(404).json({message: "Error al quitar el ave del parque", error: error.message})
-//                     }
-//                 } catch (error) {
-//                     res.status(404).json({message: "Error al quitar el parque del ave", error: error.message})
-//                 }
-//             }else{
-//                 try {
-//                     await Ave.findByIdAndUpdate(id, {
-//                         $push: {parque: parques}
-//                     })
-//                     try {
-//                         await Parque.findByIdAndUpdate(parque, {
-//                             $push: { aves: id },
-//                         })
-//                     } catch (error) {
-//                         res.status(404).json({message: "Error al meter el ave en el parque", error: error.message})
-//                     }
-//                 } catch (error) {
-//                     res.status(404).json({message: "Error al meter el parque en el ave", error: error.message})
-//                 }
-//             }
-//         }),
-
-//     ]).then(async () => {
-//         return res.status(200).json({
-//             dataUpdate: await Ave.findById(id).populate("parque")
-//         })
-//     })
-// }else{
-//     res.status(404).json("este ave no existe ❌")
-// }
