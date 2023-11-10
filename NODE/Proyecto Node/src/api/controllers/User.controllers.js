@@ -1226,19 +1226,19 @@ const getLikesAves = async (req, res, next) => {
 const follow = async (req, res, next) => {
   try {
     const { id } = req.params //ESTE ID ES DE LA PERSONA QUE QUEREMOS VER SI SEGUIMOS O NO
-    const {_id, followed } = req.user 
-    if(followed.includes(id)){
+    const {_id, followed } = req.user //ESTE ES EL USUARIO LOGADO
+    if(followed.includes(id)){ // SI EN FOLLOWED APARECE LA PERSONA QUE HEMOS BUSCADO, LA SACAMOAS, SINO LA METEMOS
       try {
-        await User.findByIdAndUpdate(_id, {
+        await User.findByIdAndUpdate(_id, {  //SE ACTUALIZA EL USUARIO LOGADO
           $pull: { followed: id },
         });
         try {
-          await User.findByIdAndUpdate(id, {
+          await User.findByIdAndUpdate(id, { // Y SACAMOS AL USUARIO LOGADO DE LA PARTE DE FOLLOWERS DE LA PERSONA QUE HEMOS BUSCADO
             $pull: { followers: _id },
           });
           return res.status(200).json({
-            userFollowed: await User.findById(id),
-            userFollow: await User.findById(_id),
+            userFollowed: await User.findById(id).populate('followed'),
+            userFollow: await User.findById(_id).populate('followers'),
             action: `pull id ${id}`,
           });
         } catch (error) {
@@ -1263,8 +1263,8 @@ const follow = async (req, res, next) => {
             $push: { followers: _id },
           });
           return res.status(200).json({
-            userFollowed: await User.findById(id),
-            userFollow: await User.findById(_id),
+            userFollowed: await User.findById(id), 
+            userFollow: await User.findById(_id),  
             action: `push id ${id}`,
           });
         } catch (error) {
