@@ -285,22 +285,6 @@ const getMasAves = async (req, res, next) => {
     }
 };
 
-//-------------GET PARQUE POR LIKES---------------
-
-const getParquePorLikes = async (req, res, next) => {
-    try {
-      const parquePorLike = await Parque.find()
-      if(parquePorLike.length > 0){
-        parquePorLike.sort((a, b) => b.likes.length - a.likes.length)
-        return res.status(200).json(parquePorLike)
-      }else{
-        return res.status(404).json("No hay parques favoritos ❌")
-      }
-    } catch (error) {
-      return res.status(404).json(error.message)
-    }
-  }
-
 //----------GET SOLO PARQUES CON LIKES -------------
 
 const getParqueConLikes = async (req, res, next) => {
