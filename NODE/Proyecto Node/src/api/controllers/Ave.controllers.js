@@ -207,6 +207,11 @@ const deleteAve = async (req, res, next) => {
                   { aves: id },
                   { $pull: { aves: id } }
                 );
+                // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
+                const existAve = await Ave.findById(id);
+                return res.status(existAve ? 404 : 200).json({
+                deleteTest: existAve ? false : true,
+                });
                 
               } catch (error) {
                 return res.status(404).json({
@@ -220,12 +225,9 @@ const deleteAve = async (req, res, next) => {
               error: 'error catch delete User',
               message: error.message,
             });
+            
           }
-          // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
-          const existAve = await Ave.findById(id);
-          return res.status(existAve ? 404 : 200).json({
-          deleteTest: existAve ? false : true,
-          });
+          
       }else{
         return res.status(404).json("este ave no existe ❌")
       }
@@ -339,7 +341,7 @@ const getPorLikes = async (req, res, next) => {
     try {
         const allAves = await Ave.find()
     if(allAves.length > 0){
-        allAves.sort((a, b) => b.likes - a.likes)
+        allAves.sort((a, b) => b.likes.length - a.likes.length)
     }
     res.status(200).json(allAves)
     } catch (error) {

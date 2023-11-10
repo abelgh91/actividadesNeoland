@@ -202,6 +202,11 @@ const deleteParque = async (req, res, next) => {
                   { parque: id },
                   { $pull: { parque: id } }
                 );
+                // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
+                const existParque = await Parque.findById(id);
+                return res.status(existParque ? 404 : 200).json({
+                deleteTest: existParque ? false : true,
+                }); 
                 
               } catch (error) {
                 return res.status(404).json({
@@ -214,13 +219,6 @@ const deleteParque = async (req, res, next) => {
                   error: 'error catch delete User',
                   message: error.message,
                 })};
-                
-                // buscamos el user por id para luego en la respuesta lanzar un 404 o un 200 en caso de que exista o que no exista
-                const existParque = await Parque.findById(id);
-                return res.status(existParque ? 404 : 200).json({
-                deleteTest: existParque ? false : true,
-                }); 
-      
       }else{
         return res.status(404).json("este parque no existe ❌")
       }
@@ -435,4 +433,4 @@ const sortVisitado = async (req, res, next) => {
     }
 }
 
-module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves, toggleParqueAve, sortSuperficie, sortLikes, sortVisitado, getMasSuperficie, getParquePorLikes, getParqueConLikes }
+module.exports = { crearParque, getById, getByName, getAll, update, deleteParque,getCCAA, getProvincia, getMasAves, toggleParqueAve, sortSuperficie, sortLikes, sortVisitado, getMasSuperficie, getParqueConLikes }

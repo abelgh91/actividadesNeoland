@@ -35,7 +35,6 @@ ParqueRoutes.get('/sortsuperficie/sort', sortSuperficie);
 ParqueRoutes.get('/sortlikes/sort', sortLikes);
 ParqueRoutes.get('/sortvisitado/sort', sortVisitado);
 ParqueRoutes.get('/massuperficie/superficie', getMasSuperficie);
-ParqueRoutes.get('/parqueporlikes/likes', getParquePorLikes);
 ParqueRoutes.get('/parqueconlikes/likes', getParqueConLikes);
 
 //-------------CON AUTENTICACION-----------
