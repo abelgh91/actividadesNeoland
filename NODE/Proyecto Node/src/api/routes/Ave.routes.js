@@ -1,10 +1,10 @@
-const { isAuthAdmin, isAuth } = require("../../middleware/auth.middleware");
-const { upload } = require("../../middleware/files.middleware");
+const { isAuthAdmin, isAuth } = require('../../middleware/auth.middleware');
+const { upload } = require('../../middleware/files.middleware');
 const { crearAve, getAll, getById, getByName, update, deleteAve, avesPeligro, getTipos, getAge, getPorProvincia, getPorCCAA, getPorLikes, getMasVistas,toggleAveParque } = require("../controllers/Ave.controllers");
 
-const Ave = require("../models/Ave.model");
+const Ave = require('../models/Ave.model');
 
-const AveRoutes = require("express").Router();
+const AveRoutes = require('express').Router();
 
 AveRoutes.post('/crear', upload.single('image'), crearAve);
 AveRoutes.get('/', getAll);

@@ -30,7 +30,7 @@ const {register,
 const User = require("../models/User.model");
 
 
-const UserRoutes = require("express").Router()
+const UserRoutes = require('express').Router()
 
 UserRoutes.post('/register', upload.single('image'), register);
 UserRoutes.post('/registerUtil', upload.single('image'), registerEstado);
@@ -40,13 +40,13 @@ UserRoutes.post('/login/autologin', autoLogin);
 UserRoutes.post('/resend', resendCode);
 UserRoutes.post('/check', checkNewUser);
 UserRoutes.patch('/forgotpassword/forgotpassword', changePassword);
-UserRoutes.get("/:id", getById);
-UserRoutes.get("/name/:name", getByName);
-UserRoutes.get("/", getAll);
-UserRoutes.get("/sortfollowers/sort", sortFollowers);
+UserRoutes.get('/:id', getById);
+UserRoutes.get('/name/:name', getByName);
+UserRoutes.get('/', getAll);
+UserRoutes.get('/sortfollowers/sort', sortFollowers);
 
 //---------------controladores autenticados
-UserRoutes.get("/pruebas", [isAuth], exampleAuth);
+UserRoutes.get('/pruebas', [isAuth], exampleAuth);
 UserRoutes.patch('/changepassword', [isAuth], modifyPassword);
 UserRoutes.patch('/update/:id', [isAuth], upload.single('image'), update);
 UserRoutes.delete('/deleteuser/:id', [isAuthAdmin], deleteUser);
@@ -59,6 +59,6 @@ UserRoutes.patch('/follow/:id', [isAuth], follow);
 UserRoutes.get('/verlikesparques/parques', [isAuth], getLikesParque);
 
 // ----------> controladores que se utilizan con redirect
-UserRoutes.post("/register/sendMail/:id", sendCode);
+UserRoutes.post('/register/sendMail/:id', sendCode);
 UserRoutes.patch('/sendPassword/:id', sendPassword);
 module.exports = UserRoutes;

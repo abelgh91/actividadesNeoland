@@ -1,5 +1,5 @@
-const { isAuthAdmin, isAuth } = require("../../middleware/auth.middleware");
-const { upload } = require("../../middleware/files.middleware");
+const { isAuthAdmin, isAuth } = require('../../middleware/auth.middleware');
+const { upload } = require('../../middleware/files.middleware');
 const {
     crearParque, 
     getById, 
@@ -17,9 +17,9 @@ const {
     getMasSuperficie, 
     getParquePorLikes,
     getParqueConLikes,
-} = require("../controllers/Parque.controllers");
+} = require('../controllers/Parque.controllers');
 
-const Parque = require("../models/Parque.model");
+const Parque = require('../models/Parque.model');
 
 const ParqueRoutes = require("express").Router()
 

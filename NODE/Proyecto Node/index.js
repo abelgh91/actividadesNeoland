@@ -30,13 +30,13 @@ app.use(express.urlencoded({ limit: '5mb', extended: false }));
 
 //creamos rutas. Tenemos que importar la funcion de las rutas cuando tengamos creado el archivo de las routes.
 const userRoutes = require('./src/api/routes/User.routes');
-app.use("/api/v1/users/", userRoutes);
+app.use('/api/v1/users/', userRoutes);
 
 const ParqueRoutes = require('./src/api/routes/Parque.routes');
-app.use("/api/v1/parques/", ParqueRoutes)
+app.use('/api/v1/parques/', ParqueRoutes);
 
 const AveRoutes = require('./src/api/routes/Ave.routes');
-app.use("/api/v1/aves/", AveRoutes);
+app.use('/api/v1/aves/', AveRoutes);
 //creamos una funcion para que gestione cuando no encuentre la ruta(404) y otra para cuando crashee(500)
 
 app.use('*', (req, res, next) => {

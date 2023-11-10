@@ -1,17 +1,17 @@
-const { deleteImgCloudinary } = require("../../middleware/files.middleware");
-const { setSendEmail, getSendEmail } = require("../../state/state.data");
-const randomCode = require("../../utils/randomCode");
-const sendEmail = require("../../utils/sendEmail");
-const User = require("../models/User.model");
-const nodemailer = require("nodemailer");
-const bcrypt = require("bcrypt");
-const { generateToken } = require("../../utils/token");
-const setError = require("../../helpers/handle-error");
-const randomPassword = require("../../utils/randomPassword");
+const { deleteImgCloudinary } = require('../../middleware/files.middleware');
+const { setSendEmail, getSendEmail } = require('../../state/state.data');
+const randomCode = require('../../utils/randomCode');
+const sendEmail = require('../../utils/sendEmail');
+const User = require('../models/User.model');
+const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt');
+const { generateToken } = require('../../utils/token');
+const setError = require('../../helpers/handle-error');
+const randomPassword = require('../../utils/randomPassword');
 const validator = require('validator');
 const enumGenderOk = require('../../utils/enumOk');
-const Parque = require("../models/Parque.model");
-const Ave = require("../models/Ave.model");
+const Parque = require('../models/Parque.model');
+const Ave = require('../models/Ave.model');
 
 
 //  ------------------REGISTER LARGO--------------------------

@@ -1,100 +1,98 @@
-const { deleteImgCloudinary } = require("../../middleware/files.middleware");
-const Ave = require("../models/Ave.model");
-const Parque = require("../models/Parque.model");
-const User = require("../models/User.model");
-
-
+const { deleteImgCloudinary } = require('../../middleware/files.middleware');
+const Ave = require('../models/Ave.model');
+const Parque = require('../models/Parque.model');
+const User = require('../models/User.model');
 
 //-----------------CREAR---------------------
 
 const crearParque = async (req, res, next) => {
-
-    let takeImage = req.file?.path;
-    //actualizar
-    try {
-        await Parque.syncIndexes()
-        //creamos una funcion para meterle la info que recibamos por req.body. Esta funcion crea un objeto
-        //si recibimos la imagen tenemos que meter la url cogida en takeImage en newParque, sino una img por defecto
-        const newParque = new Parque(req.body);
-        
-        if(req.file){
-            newParque.image = takeImage;
-        }else{
-            newParque.image = "https://res.cloudinary.com/dqlvldxwc/image/upload/v1699031656/parque_np84oq.png"
-        }
-        //guardamos el nuevo parque en una constante y la devolvemos si esta todo ok (200) o not found(404)
-        const saveNewParque = await newParque.save();
-
-        if(saveNewParque){
-            return res.status(200).json(saveNewParque);
-        }else {
-            return res.status(404).json("No se ha podido guardar el elemento en la Base de Datos❌⛔");
-        }
-    } catch (error) {
-        //si hay error hay que borrar la img antes de entrar al controlador ya que es un middleware
-        req.file?.path && deleteImgCloudinary(takeImage);
-        next(error); // porque quiero saber cual es el error
-        return (res.status(404).json({
-            message: "Error al crear el elemento",
-            error: error,
-        })&& next(error)
-        )
+  let takeImage = req.file?.path;
+  //actualizar
+  try {
+    await Parque.syncIndexes();
+    //creamos una funcion para meterle la info que recibamos por req.body. Esta funcion crea un objeto
+    //si recibimos la imagen tenemos que meter la url cogida en takeImage en newParque, sino una img por defecto
+    const newParque = new Parque(req.body);
+    if (req.file) {
+      newParque.image = takeImage;
+    } else {
+      newParque.image = 
+        'https://res.cloudinary.com/dqlvldxwc/image/upload/v1699031656/parque_np84oq.png';
+    }
+    //guardamos el nuevo parque en una constante y la devolvemos si esta todo ok (200) o not found(404)
+    const saveNewParque = await newParque.save();
+    if (saveNewParque) {
+      return res.status(200).json(saveNewParque);
+    } else {
+      return res
+        .status(404)
+        .json('No se ha podido guardar el elemento en la Base de Datos❌⛔');
+    }
+  } catch (error) {
+    //si hay error hay que borrar la img antes de entrar al controlador ya que es un middleware
+    req.file?.path && deleteImgCloudinary(takeImage);
+    next(error); // porque quiero saber cual es el error
+    return res.status(404).json({
+        message: 'Error al crear el elemento',
+        error: error,
+      }) && next(error)
     }
 };
-
 //--------------GET BY ID---------------
 
 const getById = async (req, res, next) => {
-    try {
-        //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
-        // en una funcion el id que hemos encontrado
-        const {id} = req.params;
-        const parqueById = await Parque.findById(id)
-        if(parqueById){
-            return res.status(200).json(parqueById)
-        }else{
-            return res.status(404).json("No ha sido posible encontrar el parque solicitado👎")
-        }
-    } catch (error) {
-        return res.status(404).json(error.message)
+  try {
+    //destructuring del id (porque nos lo han pedido por id, entonces lo buscamos) y luego guardamos
+    // en una funcion el id que hemos encontrado
+    const {id} = req.params;
+    const parqueById = await Parque.findById(id)
+    if (parqueById) {
+      return res.status(200).json(parqueById);
+    } else {
+      return res
+        .status(404)
+        .json('No ha sido posible encontrar el parque solicitado👎')
     }
+  } catch (error) {
+    return res.status(404).json(error.message)
+  }
 };
 
 //-----------GET BY NAME----------------
 
 const getByName = async (req, res, next) => {
-    try {
-        const {name} = req.params;
-        const parqueByName = await Parque.find({name});
-        if (parqueByName.length > 0){
-            return res.status(200).json(parqueByName);
-        }else {
-            return res.status(404).json("No se ha podido encontrar el parque 👎")
-        }
-    } catch (error) {
-        return res.status(404).json({
-            error: "error al buscar por nombre. Ha sido pillado en el catch 👮‍♂️",
-            message: error.message,
-        });
+  try {
+    const { name } = req.params;
+    const parqueByName = await Parque.find({ name });
+    if (parqueByName.length > 0) {
+      return res.status(200).json(parqueByName);
+    } else {
+      return res.status(404).json('No se ha podido encontrar el parque 👎')
     }
+  } catch (error) {
+    return res.status(404).json({
+      error: 'error al buscar por nombre. Ha sido pillado en el catch 👮‍♂️',
+      message: error.message,
+    });
+  }
 };
 
 //----------------GET ALL-----------------
 
 const getAll = async (req, res, next) => {
-    try {
-        const allParque = await Parque.find();
-        if(allParque.length > 0) {
-            return res.status(200).json(allParque);
-        }else{
-            return res.status(404).json("No ha sido posible encontrar el parque")
-        }
-    } catch (error) {
-        return res.status(404).json({
-            error: "error al buscar. Lo ha pillado el catch 👮‍♂️",
-            message: error.message,
-        })
+  try {
+    const allParque = await Parque.find();
+    if (allParque.length > 0) {
+      return res.status(200).json(allParque);
+    } else {
+      return res.status(404).json('No ha sido posible encontrar el parque');
     }
+  } catch (error) {
+    return res.status(404).json({
+      error: 'error al buscar. Lo ha pillado el catch 👮‍♂️',
+      message: error.message,
+    });
+  }
 };
 
 //--------------UPDATE-----------
@@ -108,9 +106,9 @@ const update = async (req, res, next) => {
         const parqueById = await Parque.findById(id);
         const patchParque = new Parque(req.body);
         // vamos a guardar info que no quiero que el usuario pueda cambiarme
-        patchParque.likes = req.parque.likes;
-        patchParque.visitado = req.parque.visitado;
-        patchParque.aves = req.parque.aves;
+        patchParque.likes = parqueById.likes;
+        patchParque.visitado = parqueById.visitado;
+        patchParque.aves = parqueById.aves;
 
         if (parqueById){
             const imgAntigua = parqueById.image;
@@ -279,7 +277,7 @@ const getMasAves = async (req, res, next) => {
             }
         }
         console.log(nombreParque)
-        parqueEncontradoporName = await Parque.find({name: nombreParque})
+        parqueEncontradoporName = await Parque.find({name: nombreParque}).populate('aves')
         res.status(200).json(parqueEncontradoporName)
     } catch (error) {
         return res.status(404).json({
@@ -421,7 +419,7 @@ const sortLikes = async (req, res, next) => {
 
 const sortVisitado = async (req, res, next) => {
     try {
-        const allParques = await Parque.find()
+        const allParques = await Parque.find().populate("visitado");
         if(allParques.length > 0){
             allParques.sort((a, b) => b.visitado - a.visitado)
             return res.status(200).json(allParques)

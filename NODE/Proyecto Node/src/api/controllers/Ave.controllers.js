@@ -1,7 +1,7 @@
-const { deleteImgCloudinary } = require("../../middleware/files.middleware");
-const Ave = require("../models/Ave.model");
-const Parque = require("../models/Parque.model");
-const User = require("../models/User.model");
+const { deleteImgCloudinary } = require('../../middleware/files.middleware');
+const Ave = require('../models/Ave.model');
+const Parque = require('../models/Parque.model');
+const User = require('../models/User.model');
 
 //-----------------CREAR---------------------
 
@@ -107,9 +107,9 @@ const update = async (req, res, next) => {
         const aveById = await Ave.findById(id);
         const patchAve = new Ave(req.body);
         // vamos a guardar info que no quiero que el usuario pueda cambiarme
-        patchAve.likes = req.ave.likes;
-        patchAve.visto = req.ave.visto;
-        patchAve.parque = req.ave.parque;
+        patchAve.likes = aveById.likes;
+        patchAve.visto =  aveById.visto;
+        patchAve.parque = aveById.parque;
 
         if (aveById){
             const imgAntigua = aveById.image;
@@ -339,7 +339,7 @@ const getPorCCAA = async (req, res, next) => {
 
 const getPorLikes = async (req, res, next) => {
     try {
-        const allAves = await Ave.find()
+        const allAves = await Ave.find().populate('likes')
     if(allAves.length > 0){
         allAves.sort((a, b) => b.likes.length - a.likes.length)
     }
@@ -353,20 +353,20 @@ const getPorLikes = async (req, res, next) => {
 
 }
 
-//----------------GET MAS VISTAS-----------------
+//----------------GET MAS VISTAS----------------- //solo quiero el mas visto por los usuarios
 
 const getMasVistas = async (req, res, next) => {
     try {
-        const allAves = await Ave.find()
+        const allAvesVistas = await Ave.find()  
         let numeroAveVistas = 0
         let aveMasVista = ''
-        for(let ave of allAves){
+        for(let ave of allAvesVistas){
             if(ave.visto.length > numeroAveVistas){
                 numeroAveVistas = ave.visto.length
                 aveMasVista = ave.name
             }
         }
-        const aveEncontradaPorName = await Ave.findOne({name: aveMasVista})
+        const aveEncontradaPorName = await Ave.findOne({name: aveMasVista}).populate('visto')
         res.status(200).json(aveEncontradaPorName)
     } catch (error) {
         return res.status(404).json({
