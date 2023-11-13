@@ -11,8 +11,8 @@ export const ArrayObjetos = () => {
         },
     ];
     return (
-        <ul>{info.map((persona, index) => (
-        <li key={index}>{persona.name}</li>
+        <ul>{info.map((persona) => (
+        <li>{persona.name} {persona.age}</li>
         ))}
         </ul>
     )
