@@ -1,25 +1,17 @@
 import { hobbies } from '../../hobbies/Hobbies';
 import './Sports.css';
 
-export const Sports = ({name, indoor, favouriteteam}) => {
+export const Sports = () => {
     const sport = hobbies.sports;
-    const sportNames = sport.map((item)=> item.name)
-    const sportFavorite = sport.map((item)=> item.favoriteTeam)
   return (
     <div>
-        <p>{name}</p>
-        <p>{indoor}</p>
-        <p>{favouriteteam}</p>
-        <ul>
-        {sportNames.map((sportName, index)=> (
-            <li key={index}>{sportName}</li>
-        ))}
-        </ul>
-        <ul>
-            {sportFavorite.map((sportfavorite, index)=>(
-                <li key={index}>{sportfavorite}</li>
-            ))}
-        </ul>
+      {sport.map((item)=>(
+        <div key={item.name}>
+          <p>{item.name}</p>
+          <p>{item.indoor}</p>
+          <p>{item.favoriteTeam}</p>
+        </div>
+      ))}
     </div>
   )
 };
