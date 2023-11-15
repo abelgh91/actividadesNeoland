@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { Title, SubTitle, Paragraph, Image } from './components'
 
-function App() {
+export const App=()=> {
 
   return (
     <>
@@ -18,6 +18,4 @@ function App() {
       </div>
     </>
   )
-}
-
-export default App
+};
