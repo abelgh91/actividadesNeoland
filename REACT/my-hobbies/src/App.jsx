@@ -6,7 +6,7 @@ import { hobbies } from './hobbies/Hobbies';
 
 
 export const App=()=> {
-  const {read, sports, movies, languages, songsHeard} = hobbies
+  const {read, sports, movies, languages} = hobbies
   const {name:sportName, indoor, favoriteTeam} = sports
   const {name, type, genre:genreMovies, vote} = movies
   const {title, authorName, authorSurname, genreRead, dateOfPublication, authorBirthDate} = read
