@@ -16,7 +16,7 @@ export const App=()=> {
       <Outlet />
     </Main>
     </div>
-    <Footer />
+    <Footer text='AyGorrion Studios S.A'/>
     </div>
     </>
   )

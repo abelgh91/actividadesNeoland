@@ -1,7 +1,7 @@
 import './Footer.css';
 
-export const Footer = ({children}) => {
+export const Footer = ({text}) => {
   return (
-    <footer>{children}</footer>
+    <footer>{text}</footer>
   )
 };
