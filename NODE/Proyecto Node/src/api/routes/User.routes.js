@@ -25,7 +25,6 @@ const {register,
     getLikesAves,
     follow,
     sortFollowers,
-    getParquePorLikes
 } = require("../controllers/User.controllers");
 const User = require("../models/User.model");
 

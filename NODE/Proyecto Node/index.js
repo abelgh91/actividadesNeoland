@@ -38,10 +38,6 @@ app.use('/api/v1/parques/', ParqueRoutes);
 const AveRoutes = require('./src/api/routes/Ave.routes');
 app.use('/api/v1/aves/', AveRoutes);
 
-const ComentarioRoutes = require('./src/api/routes/Comentarios.routes');
-app.use('/api/v1/comentarios/', ComentarioRoutes);
-
-
 //creamos una funcion para que gestione cuando no encuentre la ruta(404) y otra para cuando crashee(500)
 
 app.use('*', (req, res, next) => {

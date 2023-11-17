@@ -50,8 +50,6 @@ const UserSchema = new mongoose.Schema(
             aveVistas:  [{ type: mongoose.Schema.Types.ObjectId, ref: "Ave" }],
             followers:  [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
             followed:  [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }] ,
-            comentarios: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comentario" }],
-            likesComentarios: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comentario" }]
     },
     {
         timestamps: true,
