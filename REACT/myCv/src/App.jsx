@@ -24,9 +24,8 @@ export const App=()=> {
               onClick={() => setShowEducation(false)}
             >
               Experience
-            </button>
-    ...
-      <div>
+            </button> 
+            <div>
         {showEducation ? (
           <Education education={education} />
         ) : (
@@ -35,7 +34,6 @@ export const App=()=> {
       </div>
       <More languages={languages} habilities={habilities} volunteer={volunteer}/>
     </div>
-      
     </>
   )
 };
