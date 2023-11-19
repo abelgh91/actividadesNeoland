@@ -5,7 +5,7 @@ import { useDebounce } from 'use-debounce';
 
 export const ButtonFilter = () => {
     const [filter, setFilter] = useState("");
-    const filterRef = useRef(filter); //Utilizamos useRef para guardar el valor actual del filtro sin tener que realizar otras renderizaciones
+    const filterRef = useRef(filter); //Utilizamos useRef para guardar el valor actual del filtro y no tener que hacer muchas llamadas segun cada letra que pongas
     const [pokemonCollection, setPokemonCollection] = useState([]); // pokemonCollection es un array con el objeto del pokemon que hayamos buscado en el filter anterior
     const [debounceFilter] = useDebounce(filterRef.current, 500); // es un hook que ponemos cuando hay muchas llamadas. Le ponemos 0.5 segundos de espera
 
