@@ -21,7 +21,7 @@ export const useErrorRegister = (res, setOk, setRes) => {
           title: "Oops...",
           text: "Please , your email is incorrect !❎",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 5000,
         });
         setRes({});
       }
@@ -34,14 +34,14 @@ export const useErrorRegister = (res, setOk, setRes) => {
           title: "Oops...",
           text: "Min 8 characters, 1 upper case, 1 lower case and a special character ❎",
           showConfirmButton: false,
-          timer: 3000,
+          timer: 8000,
         });
         setRes({});
       }
 
        // cuando el userName ya existe
   if (
-    res?.response?.data?.includes(
+    res?.response?.data?.error.includes(
       "E11000 duplicate key error collection: userProyect.users"
     )
   ) {
